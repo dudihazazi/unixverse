@@ -37,6 +37,11 @@
     shell = pkgs.zsh;
   };
 
+  fonts.packages = with pkgs; [
+    nerd-fonts.jetbrains-mono
+  ];
+
+
   # CLI-only system packages
   environment.systemPackages = with pkgs; [
     git
