@@ -36,13 +36,12 @@
 
   # CLI-only system packages
   environment.systemPackages = with pkgs; [
-    # core
     git
     wget
     curl
     jq
     ripgrep
-
+    micro
     eza
     bat
     fd
