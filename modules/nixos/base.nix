@@ -27,11 +27,14 @@
   # Allow unfree packages globally
   nixpkgs.config.allowUnfree = true;
 
+  programs.zsh.enable = true;
+
   # User account (generic policy, not hardware-specific)
   users.users.dizzi21 = {
     isNormalUser = true;
     description = "Dudi Hazazi";
     extraGroups = [ "networkmanager" "wheel" ];
+    shell = pkgs.zsh;
   };
 
   # CLI-only system packages
@@ -50,5 +53,6 @@
     httpie
     btop
     p7zip
+    zsh
   ];
 }
