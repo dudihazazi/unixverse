@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
   home.username = "dizzi21";
@@ -10,12 +10,7 @@
     vlc
     libreoffice-qt6-fresh
     zed-editor
+    inputs.zen-browser.packages.${pkgs.system}.default
   ];
-
-  imports = [
-    zen-browser.homeModules.default
-  ];
-
-  programs.zen-browser.enable = true;
 
 }
