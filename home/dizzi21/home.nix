@@ -32,21 +32,25 @@
   programs.git = {
     enable = true;
 
-    userName = "dudihazazi";
-    userEmail = "hazazi.dudi@gmail.com";
-
-    delta = {
-      enable = true;
-      options = {
-        line-numbers = true;
-        side-by-side = true;
+    settings = {
+      user = {
+        name = "dudihazazi";
+        email = "hazazi.dudi@gmail.com";
       };
-    };
 
-    extraConfig = {
       init.defaultBranch = "main";
       pull.rebase = false;
       core.editor = "zed --wait";
+    };
+  };
+
+  programs.delta = {
+    enable = true;
+    enableGitIntegration = true;
+
+    options = {
+      line-numbers = true;
+      side-by-side = true;
     };
   };
 
