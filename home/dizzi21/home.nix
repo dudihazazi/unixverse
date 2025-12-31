@@ -121,6 +121,45 @@
     '';
   };
 
+  xdg.configFile."zed/settings.json" = {
+    force = true;
+    text = ''
+      {
+        "terminal": {
+          "font_family": "JetBrainsMono Nerd Font"
+        },
+        "telemetry": {
+          "diagnostics": false,
+          "metrics": false,
+        },
+        "icon_theme": {
+          "mode": "system",
+          "light": "Catppuccin Frappé",
+          "dark": "Zed (Default)",
+        },
+        "ui_font_size": 16,
+        "buffer_font_size": 15,
+        "theme": {
+          "mode": "dark",
+          "light": "One Light",
+          "dark": "Catppuccin Frappé",
+        },
+        "tab_size": 2,
+        "soft_wrap": "editor_width",
+        "indent_size": 2,
+        "use_tab": false,
+        "format_on_save": "on",
+        "trim_trailing_whitespace_on_save": true,
+        "insert_final_newline_on_save": true,
+        "languages": {
+          "Nix": {
+            "language_servers": ["nixd"],
+          },
+        },
+      }
+    '';
+  };
+
   # GUI apps (start small)
   home.packages = with pkgs; [
     # Browsers
