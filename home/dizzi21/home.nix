@@ -25,6 +25,7 @@
       init.defaultBranch = "main";
       pull.rebase = false;
       core.editor = "zed --wait";
+      push.autoSetupRemote = true;
     };
   };
 
