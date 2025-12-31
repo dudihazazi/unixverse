@@ -173,6 +173,7 @@
     uv
     go
     rustup
+    gh
 
     # Graphics
     gimp
