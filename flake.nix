@@ -9,6 +9,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nixos-hardware = {
+      url = "github:NixOS/nixos-hardware";
+    };
+
     zen-browser = {
       url = "github:youwen5/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -28,8 +32,9 @@
     in
     {
       nixosConfigurations = {
-        nixos = nixpkgs.lib.nixosSystem {
+        rog-laptop = nixpkgs.lib.nixosSystem {
           inherit system;
+          specialArgs = { inherit inputs; };
           modules = [
             ./hosts/rog-laptop/configuration.nix
             home-manager.nixosModules.home-manager

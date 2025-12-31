@@ -34,9 +34,16 @@
 
   # Networking
   networking.networkmanager.enable = true;
+  networking.nameservers = [
+    "94.140.14.14"
+    "94.140.15.15"
+    "1.1.1.1"
+    "1.0.0.1"
+  ];
 
   # Users and shells
   programs.zsh.enable = true;
+  programs.nix-ld.enable = true;
   users.users.dizzi21 = {
     isNormalUser = true;
     description = "Dudi Hazazi";
@@ -71,21 +78,25 @@
 
   # CLI-only system packages
   environment.systemPackages = with pkgs; [
-    git
-    wget
-    curl
-    jq
-    ripgrep
-    micro
-    eza
+    # Core tools
     bat
+    btop
+    curl
+    eza
     fd
     fzf
-    zoxide
+    git
     httpie
-    btop
+    jq
+    micro
+    ripgrep
+    zoxide
+    wget
+    # Archives
     p7zip
+    unzip
+    zip
+    # Shell
     zsh
-    bun
   ];
 }

@@ -67,13 +67,24 @@
       find = "fd";
       grep = "rg";
 
+      # Git shortcuts
+      g = "git";
+      ga = "git add";
+      gc = "git commit";
+      gco = "git checkout";
+      gd = "git diff";
+      gl = "git log --oneline --decorate --graph";
+      gp = "git pull";
+      gps = "git push";
+      gst = "git status -sb";
+
       # Navigation
       ".." = "cd ..";
       "..." = "cd ../..";
       "...." = "cd ../../..";
 
       # Nix shortcuts
-      ns = "sudo nixos-rebuild switch --flake ~/unixverse#nixos";
+      ns = "sudo nixos-rebuild switch --flake ~/unixverse#rog-laptop";
       nb = "nix build";
       nd = "nix develop";
       nf = "nix flake";
@@ -98,11 +109,31 @@
     settings = import ./starship.nix;
   };
 
+  programs.wezterm = {
+    enable = true;
+    extraConfig = ''
+      local wezterm = require 'wezterm'
+      return {
+        font = wezterm.font("JetBrainsMono Nerd Font"),
+        font_size = 12.0,
+        default_prog = { "zsh" },
+      }
+    '';
+  };
+
   # GUI apps (start small)
   home.packages = with pkgs; [
     # Browsers
     inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
     vivaldi
+
+    # Developer tooling (user-scoped)
+    nodejs
+    pnpm
+    bun
+    uv
+    go
+    rustup
 
     # Graphics
     gimp

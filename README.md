@@ -1,16 +1,22 @@
 # unixverse
 
-Minimal NixOS + Home Manager setup with room to grow across hosts (NixOS, macOS, WSL).
+Opinionated but minimal NixOS + Home Manager setup for a single laptop today,
+with room to scale to additional machines later.
+
+## Quick context for new contributors/agents
+
+- Single source of truth is `flake.nix`.
+- Host-specific settings live under `hosts/<name>/`.
+- Shared NixOS settings live under `modules/nixos/`.
+- Home Manager is user-scoped in `home/dizzi21/`.
+- Keep hardware- or machine-specific changes in the host folder.
 
 ## Layout
 
-- `flake.nix` : entry point
-- `hosts/`
-  - `rog-laptop/` : this machine
-- `modules/`
-  - `nixos/` : shared NixOS modules
-- `home/`
-  - `dizzi21/` : Home Manager config
+- `flake.nix`: entry point
+- `hosts/rog-laptop/`: this machine (host-only settings + hardware)
+- `modules/nixos/`: shared NixOS modules
+- `home/dizzi21/`: Home Manager config (user-level)
 
 ## Add a new host
 
@@ -20,4 +26,10 @@ Minimal NixOS + Home Manager setup with room to grow across hosts (NixOS, macOS,
 
 ## NixOS rebuild
 
-`sudo nixos-rebuild switch --flake ~/unixverse#nixos`
+`sudo nixos-rebuild switch --flake ~/unixverse#rog-laptop`
+
+## Conventions
+
+- Keep `modules/nixos/base.nix` generic for all NixOS hosts.
+- Keep `hosts/<name>/configuration.nix` for machine-specific settings only.
+- Prefer small, focused changes with clear sections and ordering.

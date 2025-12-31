@@ -28,4 +28,5 @@
     pulse.enable = true;
     # jack.enable = true; # enable only if you need JACK
   };
+
 }
