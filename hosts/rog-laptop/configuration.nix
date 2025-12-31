@@ -15,7 +15,6 @@
   networking.hostName = "nixos";
 
   # Core programs
-  programs.firefox.enable = true;
   programs.nix-ld.enable = true;
 
   # System version
