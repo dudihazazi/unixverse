@@ -5,7 +5,20 @@
   ...
 }:
 
+let
+  spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.stdenv.hostPlatform.system};
+  spicyLyricsSrc = pkgs.fetchFromGitHub {
+    owner = "Spikerko";
+    repo = "spicy-lyrics";
+    rev = "2de7a609bdead1ade90addde2b1d551d4b87e87a";
+    hash = "sha256-VEMxk9Hjtuh5fRYt0LzOhkd34sr2i6e6FFM55FJHz98=";
+  };
+in
 {
+  imports = [
+    inputs.spicetify-nix.homeManagerModules.default
+  ];
+
   # Home Manager basics
   home.username = "dizzi21";
   home.homeDirectory = "/home/dizzi21";
@@ -161,6 +174,23 @@
     '';
   };
 
+  programs.spicetify = {
+    enable = true;
+    spotifyPackage = pkgs.spotify;
+    enabledExtensions = with spicePkgs.extensions; [
+      adblockify
+      {
+        name = "spicy-lyrics.mjs";
+        src = "${spicyLyricsSrc}/builds";
+      }
+    ];
+    enabledCustomApps = with spicePkgs.apps; [
+      marketplace
+    ];
+    theme = spicePkgs.themes.catppuccin;
+    colorScheme = "frappe";
+  };
+
   # GUI apps (start small)
   home.packages = with pkgs; [
     # Browsers
@@ -181,7 +211,7 @@
     inkscape
 
     # Media
-    spotify
+    spicetify-cli
     vlc
 
     # Utilities
