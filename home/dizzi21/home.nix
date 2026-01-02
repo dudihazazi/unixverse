@@ -174,6 +174,42 @@ in
     '';
   };
 
+  # KDE Plasma (minimal declarative setup)
+  xdg.configFile."kdeglobals".text = ''
+    [General]
+    ColorScheme=Ant-Dark
+    TerminalApplication=wezterm start --cwd .
+    TerminalService=org.wezfurlong.wezterm.desktop
+    fixed=JetBrainsMono Nerd Font Mono,10,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
+
+    [Icons]
+    Theme=Papirus-Dark
+
+    [KDE]
+    LookAndFeelPackage=Ant-Dark
+    widgetStyle=Breeze
+  '';
+
+  xdg.configFile."plasmarc".text = ''
+    [Theme]
+    name=Ant-Dark
+  '';
+
+  xdg.configFile."ksplashrc".text = ''
+    [KSplash]
+    Theme=a2n.kuro
+  '';
+
+  xdg.configFile."kwinrc".text = ''
+    [Desktops]
+    Number=1
+    Rows=1
+
+    [NightColor]
+    Active=true
+    NightTemperature=4000
+  '';
+
   programs.spicetify = {
     enable = true;
     spotifyPackage = pkgs.spotify;
