@@ -34,11 +34,16 @@
 
   # Networking
   networking.networkmanager.enable = true;
+  networking.networkmanager.dns = "none";
   networking.nameservers = [
-    "94.140.14.14"
-    "94.140.15.15"
+    "9.9.9.9"
+    "149.112.112.112"
+    "2620:fe::fe"
+    "2620:fe::9"
     "1.1.1.1"
     "1.0.0.1"
+    "2606:4700:4700::1111"
+    "2606:4700:4700::1001"
   ];
 
   # Users and shells

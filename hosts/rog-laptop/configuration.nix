@@ -28,11 +28,6 @@
   environment.etc."zen/policies/policies.json".text = builtins.toJSON {
     policies = {
       DisableAppUpdate = true;
-      DNSOverHTTPS = {
-        Enabled = true;
-        ProviderURL = "https://dns.quad9.net/dns-query";
-        Locked = true;
-      };
       ExtensionSettings = {
         "*" = {
           installation_mode = "allowed";

@@ -251,6 +251,7 @@ in
     vlc
 
     # Utilities
+    easyeffects
     flameshot
     obsidian
 
