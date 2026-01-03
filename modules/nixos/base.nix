@@ -101,7 +101,5 @@
     p7zip
     unzip
     zip
-    # Shell
-    zsh
   ];
 }
