@@ -2,6 +2,7 @@
   config,
   pkgs,
   inputs,
+  lib,
   pkgsUnstable,
   ...
 }:
@@ -124,6 +125,14 @@ in
     settings = import ./starship.nix;
   };
 
+  home.activation.ohMyOpenCode = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    config_file="$HOME/.config/opencode/opencode.json"
+    if [ ! -f "$config_file" ] || ! grep -q '"oh-my-opencode"' "$config_file"; then
+      export PATH="${pkgsUnstable.opencode}/bin:${pkgs.bun}/bin:$PATH"
+      "${pkgs.bun}/bin/bunx" oh-my-opencode install --no-tui --claude=no --chatgpt=yes --gemini=no
+    fi
+  '';
+
   programs.wezterm = {
     enable = true;
     extraConfig = ''
@@ -243,6 +252,7 @@ in
     rustup
     gh
     pkgsUnstable.codex
+    pkgsUnstable.opencode
 
     # Graphics
     gimp
