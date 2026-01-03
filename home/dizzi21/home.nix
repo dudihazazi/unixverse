@@ -2,6 +2,7 @@
   config,
   pkgs,
   inputs,
+  pkgsUnstable,
   ...
 }:
 
@@ -241,6 +242,7 @@ in
     go
     rustup
     gh
+    pkgsUnstable.codex
 
     # Graphics
     gimp
