@@ -19,6 +19,7 @@ in
 {
   imports = [
     inputs.spicetify-nix.homeManagerModules.default
+    inputs.catppuccin.homeModules.default
   ];
 
   # Home Manager basics
@@ -27,6 +28,44 @@ in
   home.stateVersion = "25.11";
 
   programs.home-manager.enable = true;
+
+  # Themes
+  catppuccin = {
+    kvantum = {
+      apply = true;
+      enable = true;
+      flavor = "frappe";
+      accent = "lavender";
+    };
+
+    starship = {
+      enable = true;
+      flavor = "frappe";
+    };
+
+    wezterm = {
+      apply = true;
+      enable = true;
+      flavor = "frappe";
+      accent = "lavender";
+    };
+
+    zed = {
+      enable = true;
+      flavor = "frappe";
+      accent = "lavender";
+
+      icons = {
+        enable = true;
+        flavor = "frappe";
+      };
+    };
+  };
+
+  qt = {
+    enable = true;
+    style.name = "kvantum";
+  };
 
   # Git + diffs
   programs.git = {
@@ -138,51 +177,44 @@ in
     enable = true;
     extraConfig = ''
       local wezterm = require 'wezterm'
-      return {
-        font = wezterm.font("JetBrainsMono Nerd Font"),
-        font_size = 12.0,
-        default_prog = { "zsh" },
-      }
+      config = config or {}
+      if next(config) == nil and wezterm.config_builder then
+        config = wezterm.config_builder()
+      end
+
+      config.font = wezterm.font("JetBrainsMono Nerd Font")
+      config.font_size = 12.0
+      config.default_prog = { "zsh" }
+
+      return config
     '';
   };
 
-  xdg.configFile."zed/settings.json" = {
-    force = true;
-    text = ''
-      {
-        "terminal": {
-          "font_family": "JetBrainsMono Nerd Font"
-        },
-        "telemetry": {
-          "diagnostics": false,
-          "metrics": false,
-        },
-        "icon_theme": {
-          "mode": "system",
-          "light": "Catppuccin Frappé",
-          "dark": "Zed (Default)",
-        },
-        "ui_font_size": 16,
-        "buffer_font_size": 15,
-        "theme": {
-          "mode": "dark",
-          "light": "One Light",
-          "dark": "Catppuccin Frappé",
-        },
-        "tab_size": 2,
-        "soft_wrap": "editor_width",
-        "indent_size": 2,
-        "use_tab": false,
-        "format_on_save": "on",
-        "trim_trailing_whitespace_on_save": true,
-        "insert_final_newline_on_save": true,
-        "languages": {
-          "Nix": {
-            "language_servers": ["nixd"],
-          },
-        },
-      }
-    '';
+  programs.zed-editor = {
+    enable = true;
+    userSettings = {
+      terminal = {
+        font_family = "JetBrainsMono Nerd Font";
+      };
+      telemetry = {
+        diagnostics = false;
+        metrics = false;
+      };
+      ui_font_size = 16;
+      buffer_font_size = 15;
+      tab_size = 2;
+      soft_wrap = "editor_width";
+      indent_size = 2;
+      use_tab = false;
+      format_on_save = "on";
+      trim_trailing_whitespace_on_save = true;
+      insert_final_newline_on_save = true;
+      languages = {
+        Nix = {
+          language_servers = [ "nixd" ];
+        };
+      };
+    };
   };
 
   # KDE Plasma (minimal declarative setup)
@@ -198,7 +230,7 @@ in
 
     [KDE]
     LookAndFeelPackage=Ant-Dark
-    widgetStyle=Breeze
+    widgetStyle=kvantum
   '';
 
   xdg.configFile."plasmarc".text = ''
@@ -267,6 +299,9 @@ in
     easyeffects
     flameshot
     obsidian
+
+    # Theming
+    kdePackages.qtstyleplugin-kvantum
 
     # Work
     libreoffice-qt6-fresh
