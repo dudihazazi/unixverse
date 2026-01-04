@@ -104,6 +104,7 @@ in
       nb = "nix build";
       nd = "nix develop";
       nf = "nix flake";
+      zed = "zeditor";
     };
   };
 
