@@ -1,5 +1,4 @@
 {
-  config,
   pkgs,
   inputs,
   lib,
@@ -143,6 +142,7 @@ in
       nb = "nix build";
       nd = "nix develop";
       nf = "nix flake";
+      nfu = "sudo nix flake update";
       zed = "zeditor";
     };
   };
