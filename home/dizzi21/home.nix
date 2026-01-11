@@ -138,7 +138,7 @@ in
       "...." = "cd ../../..";
 
       # Nix shortcuts
-      ns = "sudo nixos-rebuild switch --flake ~/unixverse#rog-laptop";
+      ns = "sudo nixos-rebuild switch --flake ~/projects/unixverse#rog-laptop";
       nb = "nix build";
       nd = "nix develop";
       nf = "nix flake";
