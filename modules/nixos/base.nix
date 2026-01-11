@@ -91,12 +91,17 @@
     fd
     fzf
     git
-    httpie
     jq
     micro
+    procs
     ripgrep
+    tokei
+    xh
     zoxide
     wget
+    # Storage
+    duf
+    dust
     # Archives
     p7zip
     unzip
