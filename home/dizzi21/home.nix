@@ -168,8 +168,8 @@ in
   home.activation.ohMyOpenCode = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
     config_file="$HOME/.config/opencode/opencode.json"
     if [ ! -f "$config_file" ] || ! grep -q '"oh-my-opencode"' "$config_file"; then
-      export PATH="${pkgsUnstable.opencode}/bin:${pkgs.bun}/bin:$PATH"
-      "${pkgs.bun}/bin/bunx" oh-my-opencode install --no-tui --claude=no --chatgpt=yes --gemini=no
+      export PATH="${pkgsUnstable.opencode}/bin:${pkgsUnstable.bun}/bin:$PATH"
+      "${pkgsUnstable.bun}/bin/bunx" oh-my-opencode install --no-tui --claude=no --chatgpt=yes --gemini=no
     fi
   '';
 
@@ -192,6 +192,7 @@ in
 
   programs.zed-editor = {
     enable = true;
+    package = pkgsUnstable.zed-editor;
     userSettings = {
       terminal = {
         font_family = "JetBrainsMono Nerd Font";
@@ -277,13 +278,13 @@ in
     vivaldi
 
     # Developer tooling (user-scoped)
-    nodejs
-    pnpm
-    bun
-    uv
-    go
-    rustup
-    gh
+    pkgsUnstable.nodejs
+    pkgsUnstable.pnpm
+    pkgsUnstable.bun
+    pkgsUnstable.uv
+    pkgsUnstable.go
+    pkgsUnstable.rustup
+    pkgsUnstable.gh
     pkgsUnstable.codex
     pkgsUnstable.opencode
 
@@ -305,7 +306,7 @@ in
 
     # Work
     libreoffice-qt6-fresh
-    zed-editor
+    pkgsUnstable.zed-editor
     nixd
     nixfmt-rfc-style
   ];
