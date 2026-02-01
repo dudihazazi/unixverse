@@ -138,11 +138,11 @@ in
       "...." = "cd ../../..";
 
       # Nix shortcuts
-      ns = "sudo nixos-rebuild switch --flake ~/projects/unixverse#rog-laptop";
+      ns = "sudo nixos-rebuild switch --flake ~/Documents/projects/unixverse#rog-laptop";
       nb = "nix build";
       nd = "nix develop";
       nf = "nix flake";
-      nfu = "sudo nix flake update";
+      nfu = "sudo nix flake update ~/Documents/projects/unixverse";
       zed = "zeditor";
     };
   };
