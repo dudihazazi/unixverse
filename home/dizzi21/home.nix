@@ -300,6 +300,7 @@ in
     easyeffects
     flameshot
     obsidian
+    telegram-desktop
 
     # Theming
     kdePackages.qtstyleplugin-kvantum
