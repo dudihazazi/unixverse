@@ -32,6 +32,8 @@ in
     zed = "zeditor";
   };
 
+  programs.starship.settings = import ./starship-fancy.nix;
+
   # Themes
   catppuccin = {
     kvantum = {

@@ -1,7 +1,7 @@
 # Starship prompt settings (Home Manager imports this file)
 {
   "$schema" = "https://starship.rs/config-schema.json";
-  format = "[](red)$os$username[](bg:peach fg:red)$directory[](bg:yellow fg:peach)$git_branch$git_status[](fg:yellow bg:green)$c$rust$golang$nodejs$php$java$kotlin$haskell$python[](fg:green bg:sapphire)$conda[](fg:sapphire bg:lavender)$time[ ](fg:lavender)$cmd_duration$line_break$character";
+  format = "[](red)$os$username[](bg:peach fg:red)$directory[](bg:yellow fg:peach)$git_branch$git_status[](fg:yellow bg:green)$c$rust$golang$nodejs$python[](fg:green bg:sapphire)$conda[](fg:sapphire bg:lavender)$time[ ](fg:lavender)$cmd_duration$line_break$character";
 
   os = {
     disabled = false;
@@ -82,30 +82,6 @@
 
   golang = {
     symbol = "";
-    style = "bg:green";
-    format = "[[ $symbol( $version) ](fg:crust bg:green)]($style)";
-  };
-
-  php = {
-    symbol = "";
-    style = "bg:green";
-    format = "[[ $symbol( $version) ](fg:crust bg:green)]($style)";
-  };
-
-  java = {
-    symbol = " ";
-    style = "bg:green";
-    format = "[[ $symbol( $version) ](fg:crust bg:green)]($style)";
-  };
-
-  kotlin = {
-    symbol = "";
-    style = "bg:green";
-    format = "[[ $symbol( $version) ](fg:crust bg:green)]($style)";
-  };
-
-  haskell = {
-    symbol = "";
     style = "bg:green";
     format = "[[ $symbol( $version) ](fg:crust bg:green)]($style)";
   };

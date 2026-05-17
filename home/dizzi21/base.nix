@@ -100,7 +100,6 @@
   programs.starship = {
     enable = true;
     enableZshIntegration = true;
-    settings = import ./starship.nix;
   };
 
   home.activation.ohMyOpenCode = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
