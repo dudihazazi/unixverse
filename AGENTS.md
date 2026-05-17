@@ -19,21 +19,21 @@ Agents should optimize for safe, reviewable, minimal diffs.
 
 - Switch (apply changes):
   - From repo root: `sudo nixos-rebuild switch --flake .#rog-laptop`
-  - From anywhere: `sudo nixos-rebuild switch --flake ~/unixverse#rog-laptop`
+  - From anywhere: `sudo nixos-rebuild switch --flake ~/devs/unixverse#rog-laptop`
   - WSL host: `sudo nixos-rebuild switch --flake ~/devs/unixverse#wsl`
 
 - Build only (no switch):
   - From repo root: `sudo nixos-rebuild build --flake .#rog-laptop`
-  - From anywhere: `sudo nixos-rebuild build --flake ~/unixverse#rog-laptop`
+  - From anywhere: `sudo nixos-rebuild build --flake ~/devs/unixverse#rog-laptop`
   - WSL host: `sudo nixos-rebuild build --flake ~/devs/unixverse#wsl`
 
 - Test (activate temporarily):
   - From repo root: `sudo nixos-rebuild test --flake .#rog-laptop`
-  - From anywhere: `sudo nixos-rebuild test --flake ~/unixverse#rog-laptop`
+  - From anywhere: `sudo nixos-rebuild test --flake ~/devs/unixverse#rog-laptop`
 
 - Dry build (evaluate/build plan):
   - From repo root: `sudo nixos-rebuild dry-build --flake .#rog-laptop`
-  - From anywhere: `sudo nixos-rebuild dry-build --flake ~/unixverse#rog-laptop`
+  - From anywhere: `sudo nixos-rebuild dry-build --flake ~/devs/unixverse#rog-laptop`
 
 ### Flake operations
 
@@ -68,6 +68,8 @@ Do not rely on aliases in CI or agent scripts; use the full commands.
 - Formatter: `nixfmt-rfc-style` (installed via Home Manager packages).
 - Format a single file:
   - `nixfmt path/to/file.nix`
+- Format a single file when `nixfmt` is not installed locally:
+  - `nix run nixpkgs#nixfmt-rfc-style -- path/to/file.nix`
 - Format all Nix files in the repo (requires `fd`):
   - `fd -e nix -x nixfmt`
 
@@ -82,11 +84,18 @@ This repo is primarily configuration; there are no unit tests.
 The closest equivalents to a "single test" are targeted evaluations/builds:
 
 - Evaluate/build only this host (no switch):
-  - `sudo nixos-rebuild build --flake ~/unixverse#rog-laptop`
+  - `sudo nixos-rebuild build --flake ~/devs/unixverse#rog-laptop`
   - From repo root: `nix build .#nixosConfigurations.rog-laptop.config.system.build.toplevel`
+  - From repo root: `nix build .#nixosConfigurations.wsl.config.system.build.toplevel`
 
 - Evaluate the flake (all checks):
   - `nix flake check`
+
+- Prefer non-privileged validation before privileged rebuilds:
+  1. `nix flake check`
+  2. `nix build .#nixosConfigurations.wsl.config.system.build.toplevel`
+  3. `nix build .#nixosConfigurations.rog-laptop.config.system.build.toplevel`
+  4. `sudo nixos-rebuild build --flake ~/devs/unixverse#<host>`
 
 
 If adding checks/tests, prefer adding `checks` outputs to `flake.nix` and keep

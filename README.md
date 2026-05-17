@@ -5,6 +5,8 @@ Opinionated but minimal NixOS + Home Manager setup.
 This repo is a Nix flake that builds complete NixOS systems (plus Home Manager)
 for the hosts defined in `flake.nix`.
 
+The expected local checkout path is `~/devs/unixverse` on all hosts.
+
 ## Supported hosts
 
 - `rog-laptop` (regular NixOS install): `hosts/rog-laptop/`
@@ -37,15 +39,15 @@ These steps apply to the `rog-laptop` style install (i.e. not WSL).
 
 1. Clone this repo (pick a location and stick to it):
 
-   `git clone <YOUR_REPO_URL> ~/unixverse`
+   `git clone <YOUR_REPO_URL> ~/devs/unixverse`
 
 2. (Optional but recommended) Review what will change before switching:
 
-   `sudo nixos-rebuild dry-build --flake ~/unixverse#rog-laptop`
+   `sudo nixos-rebuild dry-build --flake ~/devs/unixverse#rog-laptop`
 
 3. Apply the configuration:
 
-   `sudo nixos-rebuild switch --flake ~/unixverse#rog-laptop`
+   `sudo nixos-rebuild switch --flake ~/devs/unixverse#rog-laptop`
 
 4. Reboot if you changed low-level things (bootloader, kernel, display stack):
 
@@ -68,10 +70,28 @@ This flake also includes a `wsl` NixOS configuration based on `NixOS-WSL`.
 
 ## Common workflows
 
-- **Build only (safe)**: `sudo nixos-rebuild build --flake ~/unixverse#rog-laptop`
-- **Dry-run build plan**: `sudo nixos-rebuild dry-build --flake ~/unixverse#rog-laptop`
-- **Update flake inputs** (changes `flake.lock`): `nix flake update --flake ~/unixverse`
-- **Check flake evaluation**: `nix flake check --flake ~/unixverse`
+- **Build only (safe)**:
+  - `sudo nixos-rebuild build --flake ~/devs/unixverse#rog-laptop`
+  - `sudo nixos-rebuild build --flake ~/devs/unixverse#wsl`
+- **Dry-run build plan**:
+  - `sudo nixos-rebuild dry-build --flake ~/devs/unixverse#rog-laptop`
+  - `sudo nixos-rebuild dry-build --flake ~/devs/unixverse#wsl`
+- **Switch/apply**:
+  - `sudo nixos-rebuild switch --flake ~/devs/unixverse#rog-laptop`
+  - `sudo nixos-rebuild switch --flake ~/devs/unixverse#wsl`
+- **Update flake inputs** (changes `flake.lock`): `nix flake update --flake ~/devs/unixverse`
+- **Check flake evaluation**: `nix flake check --flake ~/devs/unixverse`
+
+`nix build` and `nixos-rebuild build` may create a local `result` symlink to a
+store path. It is generated output, ignored by git, and safe to remove when you
+do not need the current build artifact.
+
+## Included components
+
+- Home Manager for user-level configuration.
+- NixOS-WSL for the `wsl` host.
+- nixos-hardware for machine-specific hardware modules.
+- Zen Browser, Spicetify, and Catppuccin inputs for desktop/user features.
 
 ## Repo map
 
@@ -84,7 +104,13 @@ This flake also includes a `wsl` NixOS configuration based on `NixOS-WSL`.
 
 1. Create `hosts/<name>/configuration.nix`
 2. Add the host to `nixosConfigurations` in `flake.nix`
-3. Keep hardware quirks in `hosts/<name>/` (not in shared modules)
+3. Import hardware configuration or nixos-hardware modules if the host needs them
+4. Pick the appropriate shared modules from `modules/nixos/`
+5. Add the Home Manager user module in `flake.nix` if the host should manage user config
+6. Keep hardware quirks in `hosts/<name>/` (not in shared modules)
+7. Validate the host build:
+
+   `nix build .#nixosConfigurations.<name>.config.system.build.toplevel`
 
 ## Conventions
 
