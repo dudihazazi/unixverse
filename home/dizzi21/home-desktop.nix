@@ -31,7 +31,7 @@ in
     zed = "zeditor";
   };
 
-  programs.starship.settings = import ./starship-fancy.nix;
+  programs.starship.settings = import ./programs/starship-fancy.nix;
 
   # Themes
   catppuccin = {

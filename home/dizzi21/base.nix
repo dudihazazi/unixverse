@@ -1,12 +1,12 @@
 {
   pkgs,
-  lib,
   pkgsUnstable,
-  opencodePkg ? pkgsUnstable.opencode,
   ...
 }:
 
 {
+  imports = [ ./programs/opencode.nix ];
+
   home.username = "dizzi21";
   home.homeDirectory = "/home/dizzi21";
   home.stateVersion = "25.11";
@@ -136,14 +136,6 @@
     enableZshIntegration = true;
   };
 
-  home.activation.ohMyOpenCode = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-    config_file="$HOME/.config/opencode/opencode.json"
-    if [ ! -f "$config_file" ] || ! grep -q '"oh-my-opencode"' "$config_file"; then
-      export PATH="${opencodePkg}/bin:${pkgsUnstable.bun}/bin:$PATH"
-      "${pkgsUnstable.bun}/bin/bunx" oh-my-opencode install --no-tui --claude=no --gemini=no --copilot=no || true
-    fi
-  '';
-
   home.packages = with pkgs; [
     # Developer tooling
     pkgsUnstable.nodejs
@@ -154,7 +146,6 @@
     pkgsUnstable.rustup
     pkgsUnstable.gh
     pkgsUnstable.codex
-    opencodePkg
     nixd
     nixfmt-rfc-style
   ];

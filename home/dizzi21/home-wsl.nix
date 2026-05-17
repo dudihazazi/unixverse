@@ -41,7 +41,7 @@ in
   # Override editor for WSL
   programs.git.settings.core.editor = "micro";
 
-  programs.starship.settings = import ./starship-min.nix;
+  programs.starship.settings = import ./programs/starship-min.nix;
 
   # WSL-specific shell aliases
   programs.zsh.shellAliases = {

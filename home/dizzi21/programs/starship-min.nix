@@ -118,10 +118,10 @@
 
   cmd_duration = {
     show_milliseconds = true;
-    min_time = 1500;
+    min_time = 2000;
     format = "[ $duration]($style) ";
     style = "dimmed white";
-    show_notifications = false;
+    disabled = false;
   };
 
   line_break = {
@@ -133,8 +133,5 @@
     success_symbol = "[❯](bold green)";
     error_symbol = "[❯](bold red)";
     vimcmd_symbol = "[❮](bold green)";
-    vimcmd_replace_one_symbol = "[❮](bold yellow)";
-    vimcmd_replace_symbol = "[❮](bold yellow)";
-    vimcmd_visual_symbol = "[❮](bold yellow)";
   };
 }
