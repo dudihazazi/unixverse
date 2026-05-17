@@ -17,16 +17,20 @@ let
 in
 {
   imports = [
+    ./base.nix
     inputs.spicetify-nix.homeManagerModules.default
     inputs.catppuccin.homeModules.default
   ];
 
-  # Home Manager basics
-  home.username = "dizzi21";
-  home.homeDirectory = "/home/dizzi21";
-  home.stateVersion = "25.11";
+  # Override editor for desktop
+  programs.git.settings.core.editor = "zed --wait";
 
-  programs.home-manager.enable = true;
+  # Desktop-specific shell aliases
+  programs.zsh.shellAliases = {
+    ns = "sudo nixos-rebuild switch --flake ~/Documents/projects/unixverse#rog-laptop";
+    nfu = "sudo nix flake update ~/Documents/projects/unixverse";
+    zed = "zeditor";
+  };
 
   # Themes
   catppuccin = {
@@ -66,113 +70,6 @@ in
     style.name = "kvantum";
   };
 
-  # Git + diffs
-  programs.git = {
-    enable = true;
-    settings = {
-      user = {
-        name = "dudihazazi";
-        email = "hazazi.dudi@gmail.com";
-      };
-
-      init.defaultBranch = "main";
-      pull.rebase = false;
-      core.editor = "zed --wait";
-      push.autoSetupRemote = true;
-    };
-  };
-
-  programs.delta = {
-    enable = true;
-    enableGitIntegration = true;
-    options = {
-      line-numbers = true;
-      side-by-side = true;
-    };
-  };
-
-  # Shell
-  programs.zsh = {
-    enable = true;
-    enableCompletion = true;
-    autosuggestion.enable = true;
-    syntaxHighlighting.enable = true;
-
-    history = {
-      size = 10000;
-      save = 10000;
-      share = true;
-    };
-
-    shellAliases = {
-      # Safer defaults
-      mkdir = "mkdir -p";
-
-      # Better ls
-      ls = "eza --icons --group-directories-first";
-      ll = "eza -lah --icons --group-directories-first";
-      la = "eza -a --icons --group-directories-first";
-      lt = "eza --tree --level=2 --icons";
-
-      # Better cat
-      cat = "bat";
-
-      # Better find/grep
-      find = "fd";
-      grep = "rg";
-
-      # Git shortcuts
-      g = "git";
-      ga = "git add";
-      gc = "git commit";
-      gco = "git checkout";
-      gd = "git diff";
-      gl = "git log --oneline --decorate --graph";
-      gp = "git pull";
-      gps = "git push";
-      gst = "git status -sb";
-
-      # Navigation
-      ".." = "cd ..";
-      "..." = "cd ../..";
-      "...." = "cd ../../..";
-
-      # Nix shortcuts
-      ns = "sudo nixos-rebuild switch --flake ~/Documents/projects/unixverse#rog-laptop";
-      nb = "nix build";
-      nd = "nix develop";
-      nf = "nix flake";
-      nfu = "sudo nix flake update ~/Documents/projects/unixverse";
-      zed = "zeditor";
-    };
-  };
-
-  programs.zoxide = {
-    enable = true;
-    enableZshIntegration = true;
-  };
-
-  programs.direnv = {
-    enable = true;
-    enableZshIntegration = true;
-    nix-direnv.enable = true;
-  };
-
-  # Prompt
-  programs.starship = {
-    enable = true;
-    enableZshIntegration = true;
-    settings = import ./starship.nix;
-  };
-
-  home.activation.ohMyOpenCode = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-    config_file="$HOME/.config/opencode/opencode.json"
-    if [ ! -f "$config_file" ] || ! grep -q '"oh-my-opencode"' "$config_file"; then
-      export PATH="${pkgsUnstable.opencode}/bin:${pkgsUnstable.bun}/bin:$PATH"
-      "${pkgsUnstable.bun}/bin/bunx" oh-my-opencode install --no-tui --claude=no --chatgpt=yes --gemini=no
-    fi
-  '';
-
   programs.wezterm = {
     enable = true;
     extraConfig = ''
@@ -196,6 +93,7 @@ in
     userSettings = {
       terminal = {
         font_family = "JetBrainsMono Nerd Font";
+        shell = "${pkgs.zsh}/bin/zsh";
       };
       telemetry = {
         diagnostics = false;
@@ -271,22 +169,11 @@ in
     colorScheme = "frappe";
   };
 
-  # GUI apps (start small)
+  # Desktop-only packages
   home.packages = with pkgs; [
     # Browsers
     inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
     vivaldi
-
-    # Developer tooling (user-scoped)
-    pkgsUnstable.nodejs
-    pkgsUnstable.pnpm
-    pkgsUnstable.bun
-    pkgsUnstable.uv
-    pkgsUnstable.go
-    pkgsUnstable.rustup
-    pkgsUnstable.gh
-    pkgsUnstable.codex
-    pkgsUnstable.opencode
 
     # Graphics
     gimp
@@ -308,7 +195,5 @@ in
     # Work
     libreoffice-qt6-fresh
     pkgsUnstable.zed-editor
-    nixd
-    nixfmt-rfc-style
   ];
 }

@@ -20,10 +20,12 @@ Agents should optimize for safe, reviewable, minimal diffs.
 - Switch (apply changes):
   - From repo root: `sudo nixos-rebuild switch --flake .#rog-laptop`
   - From anywhere: `sudo nixos-rebuild switch --flake ~/unixverse#rog-laptop`
+  - WSL host: `sudo nixos-rebuild switch --flake ~/devs/unixverse#wsl`
 
 - Build only (no switch):
   - From repo root: `sudo nixos-rebuild build --flake .#rog-laptop`
   - From anywhere: `sudo nixos-rebuild build --flake ~/unixverse#rog-laptop`
+  - WSL host: `sudo nixos-rebuild build --flake ~/devs/unixverse#wsl`
 
 - Test (activate temporarily):
   - From repo root: `sudo nixos-rebuild test --flake .#rog-laptop`
@@ -52,11 +54,10 @@ Home Manager directly, unless you intentionally decouple it.
 
 ### Aliases (in the configured system)
 
-The user configuration defines helpful aliases in `home/dizzi21/home.nix`:
-- `ns` → `sudo nixos-rebuild switch --flake ~/unixverse#rog-laptop`
-- `nb` → `nix build`
-- `nd` → `nix develop`
-- `nf` → `nix flake`
+The user configuration defines helpful aliases in Home Manager:
+- Desktop: `home/dizzi21/home-desktop.nix`
+- WSL: `home/dizzi21/home-wsl.nix`
+- Shared base: `home/dizzi21/base.nix`
 
 Do not rely on aliases in CI or agent scripts; use the full commands.
 
@@ -122,7 +123,7 @@ them deterministic.
 - Keep `modules/nixos/desktop.nix` focused on desktop-related services.
 - Keep `hosts/<name>/configuration.nix` for machine-specific settings:
   - hardware quirks, hostnames, device-specific services
-- Keep user programs/settings in `home/<user>/home.nix`.
+- Keep user programs/settings in `home/<user>/base.nix` + per-host overlays.
 
 ### Types and correctness
 

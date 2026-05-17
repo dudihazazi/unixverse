@@ -10,6 +10,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nixos-wsl = {
+      url = "github:nix-community/NixOS-WSL/main";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     nixos-hardware = {
       url = "github:NixOS/nixos-hardware";
     };
@@ -28,7 +33,6 @@
       url = "github:catppuccin/nix";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
-
   };
 
   outputs =
@@ -59,7 +63,23 @@
               home-manager.useUserPackages = true;
               home-manager.backupFileExtension = "bak";
               home-manager.extraSpecialArgs = { inherit inputs pkgsUnstable; };
-              home-manager.users.dizzi21 = import ./home/dizzi21/home.nix;
+              home-manager.users.dizzi21 = import ./home/dizzi21/home-desktop.nix;
+            }
+          ];
+        };
+        wsl = nixpkgs.lib.nixosSystem {
+          inherit system;
+          specialArgs = { inherit inputs pkgsUnstable; };
+          modules = [
+            inputs.nixos-wsl.nixosModules.default
+            ./hosts/wsl/configuration.nix
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.backupFileExtension = "bak";
+              home-manager.extraSpecialArgs = { inherit inputs pkgsUnstable; };
+              home-manager.users.dizzi21 = import ./home/dizzi21/home-wsl.nix;
             }
           ];
         };
