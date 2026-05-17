@@ -1,7 +1,6 @@
 {
   pkgs,
   inputs,
-  lib,
   pkgsUnstable,
   ...
 }:
@@ -27,8 +26,8 @@ in
 
   # Desktop-specific shell aliases
   programs.zsh.shellAliases = {
-    ns = "sudo nixos-rebuild switch --flake ~/Documents/projects/unixverse#rog-laptop";
-    nfu = "sudo nix flake update ~/Documents/projects/unixverse";
+    ns = "sudo nixos-rebuild switch --flake ~/devs/unixverse#rog-laptop";
+    nfu = "sudo nix flake update ~/devs/unixverse";
     zed = "zeditor";
   };
 
