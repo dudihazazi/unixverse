@@ -9,6 +9,7 @@
 
   wsl.enable = true;
   wsl.defaultUser = "dizzi21";
+  wsl.wslConf.network.generateResolvConf = false;
 
   system.stateVersion = "25.11";
 }
