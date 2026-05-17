@@ -67,13 +67,41 @@
       # Git shortcuts
       g = "git";
       ga = "git add";
+      gaa = "git add --all";
+      gap = "git add --patch";
+      gb = "git branch";
       gc = "git commit";
+      gcm = "git commit -m";
       gco = "git checkout";
       gd = "git diff";
+      gf = "git fetch";
+      gfa = "git fetch --all --prune";
       gl = "git log --oneline --decorate --graph";
+      gm = "git merge";
       gp = "git pull";
+      gpl = "git pull";
       gps = "git push";
+      gpf = "git push --force-with-lease";
+      grb = "git rebase";
+      grba = "git rebase --abort";
+      grbc = "git rebase --continue";
+      grbi = "git rebase -i";
+      gs = "git switch";
+      gsc = "git switch -c";
+      gsh = "git show";
       gst = "git status -sb";
+      gwt = "git worktree";
+      gwta = "git worktree add";
+      gwtl = "git worktree list";
+      gwtr = "git worktree remove";
+
+      # GitHub CLI shortcuts
+      ghpr = "gh pr";
+      ghprc = "gh pr create";
+      ghprco = "gh pr checkout";
+      ghprs = "gh pr status";
+      ghprv = "gh pr view --web";
+      ghrepo = "gh repo";
 
       # Navigation
       ".." = "cd ..";
@@ -96,6 +124,11 @@
     enable = true;
     enableZshIntegration = true;
     nix-direnv.enable = true;
+  };
+
+  programs.fzf = {
+    enable = true;
+    enableZshIntegration = true;
   };
 
   programs.starship = {

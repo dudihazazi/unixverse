@@ -1,5 +1,5 @@
 # modules/nixos/base.nix
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   # Nix settings
@@ -92,11 +92,13 @@
     fzf
     git
     jq
+    lazygit
     micro
     procs
     ripgrep
     tokei
     xh
+    yq-go
     zoxide
     wget
     # Storage
