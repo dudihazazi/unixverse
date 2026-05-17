@@ -33,6 +33,7 @@
       url = "github:catppuccin/nix";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
+
   };
 
   outputs =

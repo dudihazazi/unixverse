@@ -2,6 +2,7 @@
   pkgs,
   lib,
   pkgsUnstable,
+  opencodePkg ? pkgsUnstable.opencode,
   ...
 }:
 
@@ -105,7 +106,7 @@
   home.activation.ohMyOpenCode = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
     config_file="$HOME/.config/opencode/opencode.json"
     if [ ! -f "$config_file" ] || ! grep -q '"oh-my-opencode"' "$config_file"; then
-      export PATH="${pkgs.opencode}/bin:${pkgsUnstable.bun}/bin:$PATH"
+      export PATH="${opencodePkg}/bin:${pkgsUnstable.bun}/bin:$PATH"
       "${pkgsUnstable.bun}/bin/bunx" oh-my-opencode install --no-tui --claude=no --gemini=no --copilot=no || true
     fi
   '';
@@ -120,7 +121,7 @@
     pkgsUnstable.rustup
     pkgsUnstable.gh
     pkgsUnstable.codex
-    opencode
+    opencodePkg
     nixd
     nixfmt-rfc-style
   ];
