@@ -28,7 +28,7 @@ let
     presets = {
       daily = {
         orchestrator = {
-          model = "openai/gpt-5.4";
+          model = "openai/gpt-5.5";
           skills = [ "*" ];
           mcps = [
             "*"
