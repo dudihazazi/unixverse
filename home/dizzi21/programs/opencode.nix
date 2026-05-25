@@ -12,7 +12,7 @@ let
     owner = "alvinunreal";
     repo = "oh-my-opencode-slim";
     rev = "master";
-    hash = "sha256-ZN3UmXmqEzYqIymiEswJviO8P0Bu2sfiirqI4UoIk4w=";
+    hash = "sha256-gfwgtlKuN0bBXkp6ck43aBaH3bgDusnBKp2pNG18Xbo=";
   };
 
   opencodeConfig = {

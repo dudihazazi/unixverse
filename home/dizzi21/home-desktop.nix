@@ -15,6 +15,8 @@ let
   };
 in
 {
+  _module.args.opencodePkg = pkgsUnstable.opencode;
+
   imports = [
     ./base.nix
     inputs.spicetify-nix.homeManagerModules.default
@@ -94,7 +96,9 @@ in
     userSettings = {
       terminal = {
         font_family = "JetBrainsMono Nerd Font";
-        shell = "${pkgs.zsh}/bin/zsh";
+        shell = {
+          program = "${pkgs.zsh}/bin/zsh";
+        };
       };
       telemetry = {
         diagnostics = false;
@@ -104,11 +108,10 @@ in
       buffer_font_size = 15;
       tab_size = 2;
       soft_wrap = "editor_width";
-      indent_size = 2;
-      use_tab = false;
+      hard_tabs = false;
       format_on_save = "on";
-      trim_trailing_whitespace_on_save = true;
-      insert_final_newline_on_save = true;
+      remove_trailing_whitespace_on_save = true;
+      ensure_final_newline_on_save = true;
       languages = {
         Nix = {
           language_servers = [ "nixd" ];
@@ -188,6 +191,7 @@ in
     easyeffects
     flameshot
     obsidian
+    rsync
     telegram-desktop
 
     # Theming

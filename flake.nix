@@ -30,8 +30,7 @@
     };
 
     catppuccin = {
-      url = "github:catppuccin/nix";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      url = "github:catppuccin/nix/release-25.11";
     };
 
   };
