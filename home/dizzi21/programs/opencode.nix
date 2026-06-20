@@ -12,7 +12,7 @@ let
     owner = "alvinunreal";
     repo = "oh-my-opencode-slim";
     rev = "master";
-    hash = "sha256-ZN3UmXmqEzYqIymiEswJviO8P0Bu2sfiirqI4UoIk4w=";
+    hash = "sha256-gfwgtlKuN0bBXkp6ck43aBaH3bgDusnBKp2pNG18Xbo=";
   };
 
   opencodeConfig = {
@@ -28,7 +28,7 @@ let
     presets = {
       daily = {
         orchestrator = {
-          model = "openai/gpt-5.4";
+          model = "openai/gpt-5.5";
           skills = [ "*" ];
           mcps = [
             "*"
