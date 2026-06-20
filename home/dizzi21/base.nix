@@ -157,6 +157,7 @@
     pkgsUnstable.rustup
     pkgsUnstable.gh
     pkgsUnstable.codex
+    pkgsUnstable.rtk
     nixd
     nixfmt
   ];

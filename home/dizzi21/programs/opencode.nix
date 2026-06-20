@@ -134,5 +134,7 @@ in
     "opencode/skills/clonedeps".source = ohMyOpenCodeSlimSrc + "/src/skills/clonedeps";
   };
 
-  home.packages = [ opencodePkg ];
+  home.packages = [
+    opencodePkg
+  ];
 }
