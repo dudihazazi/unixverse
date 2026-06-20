@@ -10,10 +10,14 @@ let
   ohMyOpenCodeSlimSrc = inputs.oh-my-opencode-slim;
   ohMyOpenCodeSlimPackage = builtins.fromJSON (builtins.readFile (ohMyOpenCodeSlimSrc + "/package.json"));
   ohMyOpenCodeSlimVersion = ohMyOpenCodeSlimPackage.version;
+  ponytailSrc = inputs.ponytail;
 
   opencodeConfig = {
     "$schema" = "https://opencode.ai/config.json";
-    plugin = [ "oh-my-opencode-slim@${ohMyOpenCodeSlimVersion}" ];
+    plugin = [
+      "oh-my-opencode-slim@${ohMyOpenCodeSlimVersion}"
+      (ponytailSrc + "/.opencode/plugins/ponytail.mjs")
+    ];
   };
 
   ohMyOpenCodeSlimConfig = {
@@ -132,6 +136,7 @@ in
     "opencode/skills/simplify".source = ohMyOpenCodeSlimSrc + "/src/skills/simplify";
     "opencode/skills/codemap".source = ohMyOpenCodeSlimSrc + "/src/skills/codemap";
     "opencode/skills/clonedeps".source = ohMyOpenCodeSlimSrc + "/src/skills/clonedeps";
+    "opencode/commands".source = ponytailSrc + "/.opencode/command";
   };
 
   home.packages = [

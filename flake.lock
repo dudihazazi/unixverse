@@ -274,6 +274,22 @@
         "type": "github"
       }
     },
+    "ponytail": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1781859055,
+        "narHash": "sha256-YoFsjwAoQ4RDqT3dxrlLY2q4jALZPCydvvzKDi7OUwU=",
+        "owner": "DietrichGebert",
+        "repo": "ponytail",
+        "rev": "0403c4dd50ee6d0db2c3ec70b2be6655f9cb65a9",
+        "type": "github"
+      },
+      "original": {
+        "owner": "DietrichGebert",
+        "repo": "ponytail",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "catppuccin": "catppuccin",
@@ -284,6 +300,7 @@
         "nixpkgs": "nixpkgs_3",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "oh-my-opencode-slim": "oh-my-opencode-slim",
+        "ponytail": "ponytail",
         "spicetify-nix": "spicetify-nix",
         "zen-browser": "zen-browser"
       }

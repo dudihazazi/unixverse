@@ -39,6 +39,11 @@
       flake = false;
     };
 
+    ponytail = {
+      url = "github:DietrichGebert/ponytail";
+      flake = false;
+    };
+
     catppuccin = {
       url = "github:catppuccin/nix/release-26.05";
     };
