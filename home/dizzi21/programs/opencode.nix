@@ -8,13 +8,16 @@ let
   json = value: (builtins.toJSON value) + "\n";
   opencodePkg = inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.opencode;
   ohMyOpenCodeSlimSrc = inputs.oh-my-opencode-slim;
+  ohMyOpenCodeSlimPackage = builtins.fromJSON (builtins.readFile (ohMyOpenCodeSlimSrc + "/package.json"));
+  ohMyOpenCodeSlimVersion = ohMyOpenCodeSlimPackage.version;
 
   opencodeConfig = {
     "$schema" = "https://opencode.ai/config.json";
+    plugin = [ "oh-my-opencode-slim@${ohMyOpenCodeSlimVersion}" ];
   };
 
   ohMyOpenCodeSlimConfig = {
-    "$schema" = "https://unpkg.com/oh-my-opencode-slim@latest/oh-my-opencode-slim.schema.json";
+    "$schema" = "https://unpkg.com/oh-my-opencode-slim@${ohMyOpenCodeSlimVersion}/oh-my-opencode-slim.schema.json";
     preset = "daily";
     autoUpdate = false;
 
@@ -125,7 +128,6 @@ in
   xdg.configFile = {
     "opencode/opencode.json".text = json opencodeConfig;
     "opencode/oh-my-opencode-slim.json".text = json ohMyOpenCodeSlimConfig;
-    "opencode/plugins/oh-my-opencode-slim".source = ohMyOpenCodeSlimSrc;
 
     "opencode/skills/simplify".source = ohMyOpenCodeSlimSrc + "/src/skills/simplify";
     "opencode/skills/codemap".source = ohMyOpenCodeSlimSrc + "/src/skills/codemap";
