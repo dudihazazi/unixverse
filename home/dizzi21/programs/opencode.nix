@@ -1,23 +1,16 @@
 {
+  inputs,
   pkgs,
-  pkgsUnstable,
-  opencodePkg ? pkgsUnstable.opencode,
   ...
 }:
 
 let
   json = value: (builtins.toJSON value) + "\n";
-
-  ohMyOpenCodeSlimSrc = pkgs.fetchFromGitHub {
-    owner = "alvinunreal";
-    repo = "oh-my-opencode-slim";
-    rev = "master";
-    hash = "sha256-gfwgtlKuN0bBXkp6ck43aBaH3bgDusnBKp2pNG18Xbo=";
-  };
+  opencodePkg = inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.opencode;
+  ohMyOpenCodeSlimSrc = inputs.oh-my-opencode-slim;
 
   opencodeConfig = {
     "$schema" = "https://opencode.ai/config.json";
-    plugin = [ "oh-my-opencode-slim@latest" ];
   };
 
   ohMyOpenCodeSlimConfig = {
@@ -132,6 +125,7 @@ in
   xdg.configFile = {
     "opencode/opencode.json".text = json opencodeConfig;
     "opencode/oh-my-opencode-slim.json".text = json ohMyOpenCodeSlimConfig;
+    "opencode/plugins/oh-my-opencode-slim".source = ohMyOpenCodeSlimSrc;
 
     "opencode/skills/simplify".source = ohMyOpenCodeSlimSrc + "/src/skills/simplify";
     "opencode/skills/codemap".source = ohMyOpenCodeSlimSrc + "/src/skills/codemap";
