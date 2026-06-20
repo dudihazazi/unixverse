@@ -165,3 +165,9 @@ No GitHub Copilot instructions were found (`.github/copilot-instructions.md`).
 - Do not run destructive commands unless explicitly requested.
 - Prefer `nixos-rebuild build` (or `nixos-rebuild test`) before `switch` for risky changes.
 - Keep secrets out of the repo (no tokens, API keys, or private host details).
+
+## Nix Tooling Rule of Thumb
+
+- Need it everywhere? → Home Manager / NixOS.
+- Need it only in one repo? → dev environment (`nix develop`, dev shell, or project-specific flake/devshell).
+- Need it once or rarely? → `nix run`, `pnpm dlx`, or `npx`.
