@@ -9,7 +9,7 @@
 
   home.username = "dizzi21";
   home.homeDirectory = "/home/dizzi21";
-  home.stateVersion = "25.11";
+  home.stateVersion = "26.05";
 
   programs.home-manager.enable = true;
 
@@ -30,8 +30,8 @@
     enable = true;
     enableDefaultConfig = false;
 
-    matchBlocks."*" = {
-      addKeysToAgent = "yes";
+    settings."*" = {
+      AddKeysToAgent = "yes";
     };
   };
 
@@ -158,6 +158,6 @@
     pkgsUnstable.gh
     pkgsUnstable.codex
     nixd
-    nixfmt-rfc-style
+    nixfmt
   ];
 }
