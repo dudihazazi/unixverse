@@ -121,11 +121,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1781319724,
-        "narHash": "sha256-ZGuxexEMo4Xv28KJ0dX/m/PHN4oZIOnxHZpNTyrvx4M=",
+        "lastModified": 1781981105,
+        "narHash": "sha256-/1nNBbA7PrSQpTc9Qazkhl4kIPg+TNl0CjxS3UQJKlw=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "8355f0a16b2dbb06a97959a918af5b239bbe05ae",
+        "rev": "7bfff44b465909f69a442701293bc0badcf476dc",
         "type": "github"
       },
       "original": {
@@ -147,11 +147,11 @@
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
-        "lastModified": 1781935030,
-        "narHash": "sha256-VbghtmBX09cL/JIm5fXSzHnI2tFE8lorxe9Fx/hE6yk=",
+        "lastModified": 1782005722,
+        "narHash": "sha256-oHLLfAtqHPA9LlOOKlcmAZltEQLWtYbw9MGRtE2HTfE=",
         "owner": "numtide",
         "repo": "llm-agents.nix",
-        "rev": "6d65e7002dd5fe407af6d989ea49f9e89619d4db",
+        "rev": "4c323455f5dcfa0012eb79603f18597ea7efe5f3",
         "type": "github"
       },
       "original": {
@@ -258,38 +258,6 @@
         "type": "github"
       }
     },
-    "oh-my-opencode-slim": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1781956123,
-        "narHash": "sha256-akMO7W+cvemcqfxt2cnmnLNpubJadcnbhFhTYoO7haQ=",
-        "owner": "alvinunreal",
-        "repo": "oh-my-opencode-slim",
-        "rev": "9a45907ef8a29f772c8e6ebd7be92d5ca40cf287",
-        "type": "github"
-      },
-      "original": {
-        "owner": "alvinunreal",
-        "repo": "oh-my-opencode-slim",
-        "type": "github"
-      }
-    },
-    "ponytail": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1781859055,
-        "narHash": "sha256-YoFsjwAoQ4RDqT3dxrlLY2q4jALZPCydvvzKDi7OUwU=",
-        "owner": "DietrichGebert",
-        "repo": "ponytail",
-        "rev": "0403c4dd50ee6d0db2c3ec70b2be6655f9cb65a9",
-        "type": "github"
-      },
-      "original": {
-        "owner": "DietrichGebert",
-        "repo": "ponytail",
-        "type": "github"
-      }
-    },
     "root": {
       "inputs": {
         "catppuccin": "catppuccin",
@@ -299,8 +267,6 @@
         "nixos-wsl": "nixos-wsl",
         "nixpkgs": "nixpkgs_3",
         "nixpkgs-unstable": "nixpkgs-unstable",
-        "oh-my-opencode-slim": "oh-my-opencode-slim",
-        "ponytail": "ponytail",
         "spicetify-nix": "spicetify-nix",
         "zen-browser": "zen-browser"
       }

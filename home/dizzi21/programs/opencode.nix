@@ -7,139 +7,34 @@
 let
   json = value: (builtins.toJSON value) + "\n";
   opencodePkg = inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.opencode;
-  ohMyOpenCodeSlimSrc = inputs.oh-my-opencode-slim;
-  ohMyOpenCodeSlimPackage = builtins.fromJSON (builtins.readFile (ohMyOpenCodeSlimSrc + "/package.json"));
-  ohMyOpenCodeSlimVersion = ohMyOpenCodeSlimPackage.version;
-  ponytailSrc = inputs.ponytail;
+  opencodeScripts = builtins.path {
+    path = ./scripts;
+    name = "opencode-scripts";
+  };
+  opencodeAddonsSync = pkgs.writeShellApplication {
+    name = "opencode-addons-sync";
+    runtimeInputs = with pkgs; [ git coreutils ];
+    text = builtins.readFile (opencodeScripts + "/opencode-addons-sync.sh");
+  };
 
   opencodeConfig = {
     "$schema" = "https://opencode.ai/config.json";
     plugin = [
-      "oh-my-opencode-slim@${ohMyOpenCodeSlimVersion}"
-      (ponytailSrc + "/.opencode/plugins/ponytail.mjs")
+      "oh-my-opencode-slim"
+      "./plugins/ponytail.mjs"
+      "./plugins/caveman/plugin.js"
     ];
   };
-
-  ohMyOpenCodeSlimConfig = {
-    "$schema" = "https://unpkg.com/oh-my-opencode-slim@${ohMyOpenCodeSlimVersion}/oh-my-opencode-slim.schema.json";
-    preset = "daily";
-    autoUpdate = false;
-
-    presets = {
-      daily = {
-        orchestrator = {
-          model = "openai/gpt-5.5";
-          skills = [ "*" ];
-          mcps = [
-            "*"
-            "!context7"
-          ];
-        };
-
-        oracle = {
-          model = "openai/gpt-5.5";
-          variant = "high";
-          skills = [ "simplify" ];
-          mcps = [ ];
-        };
-
-        librarian = {
-          model = "openai/gpt-5.4-mini";
-          variant = "low";
-          skills = [ ];
-          mcps = [
-            "websearch"
-            "context7"
-            "grep_app"
-          ];
-        };
-
-        explorer = {
-          model = "openai/gpt-5.4-mini-fast";
-          variant = "low";
-          skills = [ ];
-          mcps = [ ];
-        };
-
-        designer = {
-          model = "openai/gpt-5.4-mini";
-          variant = "medium";
-          skills = [ ];
-          mcps = [ ];
-        };
-
-        fixer = {
-          model = "openai/gpt-5.4-mini-fast";
-          variant = "low";
-          skills = [ ];
-          mcps = [ ];
-        };
-      };
-
-      quality = {
-        orchestrator = {
-          model = "openai/gpt-5.5";
-          skills = [ "*" ];
-          mcps = [
-            "*"
-            "!context7"
-          ];
-        };
-
-        oracle = {
-          model = "openai/gpt-5.5";
-          variant = "high";
-          skills = [ "simplify" ];
-          mcps = [ ];
-        };
-
-        librarian = {
-          model = "openai/gpt-5.4-mini";
-          variant = "low";
-          skills = [ ];
-          mcps = [
-            "websearch"
-            "context7"
-            "grep_app"
-          ];
-        };
-
-        explorer = {
-          model = "openai/gpt-5.4-mini";
-          variant = "low";
-          skills = [ ];
-          mcps = [ ];
-        };
-
-        designer = {
-          model = "openai/gpt-5.4-mini";
-          variant = "medium";
-          skills = [ ];
-          mcps = [ ];
-        };
-
-        fixer = {
-          model = "openai/gpt-5.4-mini";
-          variant = "low";
-          skills = [ ];
-          mcps = [ ];
-        };
-      };
-    };
-  };
+  ohMyOpenCodeSlimConfig = import ./opencode-slim.nix;
 in
 {
   xdg.configFile = {
     "opencode/opencode.json".text = json opencodeConfig;
     "opencode/oh-my-opencode-slim.json".text = json ohMyOpenCodeSlimConfig;
-
-    "opencode/skills/simplify".source = ohMyOpenCodeSlimSrc + "/src/skills/simplify";
-    "opencode/skills/codemap".source = ohMyOpenCodeSlimSrc + "/src/skills/codemap";
-    "opencode/skills/clonedeps".source = ohMyOpenCodeSlimSrc + "/src/skills/clonedeps";
-    "opencode/commands".source = ponytailSrc + "/.opencode/command";
   };
 
   home.packages = [
     opencodePkg
+    opencodeAddonsSync
   ];
 }
