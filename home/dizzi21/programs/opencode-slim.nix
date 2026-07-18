@@ -1,6 +1,7 @@
 let
-  gpt55 = "openai/gpt-5.5";
-  gpt54mini = "openai/gpt-5.4-mini";
+  gpt56sol = "openai/gpt-5.6-sol";
+  gpt56terra = "openai/gpt-5.6-terra";
+  gpt56luna = "openai/gpt-5.6-luna";
   sharedMcps = [
     "*"
     "!context7"
@@ -10,7 +11,6 @@ let
     "context7"
     "grep_app"
   ];
-  noMcps = [ ];
 in
 {
   "$schema" = "https://unpkg.com/oh-my-opencode-slim/oh-my-opencode-slim.schema.json";
@@ -20,87 +20,51 @@ in
   presets = {
     daily = {
       orchestrator = {
-        model = gpt55;
+        model = "openai/gpt-5.6-terra";
         skills = [ "*" ];
-        mcps = sharedMcps;
+        mcps = [
+          "*"
+          "!context7"
+        ];
       };
 
       oracle = {
-        model = gpt55;
+        model = "openai/gpt-5.6-terra";
         variant = "high";
         skills = [ "simplify" ];
-        mcps = noMcps;
+        mcps = [ ];
       };
 
       librarian = {
-        model = gpt54mini;
+        model = "openai/gpt-5.6-luna";
         variant = "low";
         skills = [ ];
-        mcps = librarianMcps;
+        mcps = [
+          "websearch"
+          "context7"
+          "grep_app"
+        ];
       };
 
       explorer = {
-        model = gpt54mini;
+        model = "openai/gpt-5.6-luna";
         variant = "low";
         skills = [ ];
-        mcps = noMcps;
+        mcps = [ ];
       };
 
       designer = {
-        model = gpt54mini;
+        model = "openai/gpt-5.6-terra";
         variant = "medium";
         skills = [ ];
-        mcps = noMcps;
+        mcps = [ ];
       };
 
       fixer = {
-        model = gpt54mini;
+        model = "openai/gpt-5.6-luna";
         variant = "low";
         skills = [ ];
-        mcps = noMcps;
-      };
-    };
-
-    quality = {
-      orchestrator = {
-        model = gpt55;
-        skills = [ "*" ];
-        mcps = sharedMcps;
-      };
-
-      oracle = {
-        model = gpt55;
-        variant = "high";
-        skills = [ "simplify" ];
-        mcps = noMcps;
-      };
-
-      librarian = {
-        model = gpt54mini;
-        variant = "low";
-        skills = [ ];
-        mcps = librarianMcps;
-      };
-
-      explorer = {
-        model = gpt54mini;
-        variant = "low";
-        skills = [ ];
-        mcps = noMcps;
-      };
-
-      designer = {
-        model = gpt54mini;
-        variant = "medium";
-        skills = [ ];
-        mcps = noMcps;
-      };
-
-      fixer = {
-        model = gpt54mini;
-        variant = "low";
-        skills = [ ];
-        mcps = noMcps;
+        mcps = [ ];
       };
     };
   };
