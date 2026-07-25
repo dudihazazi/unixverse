@@ -18,6 +18,26 @@ with this file, unless doing so conflicts with user instructions or safety.
 Work autonomously when requirements and plan intent are clear. Send concise
 milestone updates while working. Ask targeted questions only when needed.
 
+### Context and exploration
+
+- Explore before committing to implementation: state the goal, constraints,
+  success criteria, and viable options for non-trivial work.
+- Use real repository artifacts as context: existing code, local instructions,
+  validation commands, tests, and relevant examples. Prefer them to invented
+  examples or long prose specifications.
+- Load context progressively. Start with repository instructions and directly
+  relevant files; inspect more only when the task requires it. Do not preload
+  an entire repository or duplicate facts discoverable from the filesystem.
+- Keep global and repository instruction files focused on enduring goals, hard
+  constraints, safety boundaries, and validation commands. Put detailed,
+  task-specific procedures in focused skills or documentation loaded on demand.
+- Give agents room to apply repository conventions and judgement. Be explicit
+  instead for irreversible, security-sensitive, format-critical, or otherwise
+  high-risk requirements.
+- Treat generated prototypes, plans, and suggestions as exploration artifacts,
+  not production changes. Review the resulting diff and validate it with the
+  repository's real tools before handoff.
+
 Escalate only for a genuinely major issue: irreversible data or system impact,
 a security risk, a breaking public contract, a fundamentally different
 architecture, or requirements that cannot meet the plan's intent.
