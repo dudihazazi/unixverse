@@ -1,7 +1,6 @@
 {
   inputs,
   pkgs,
-  pkgsUnstable,
   ...
 }:
 
@@ -153,14 +152,14 @@ in
 
   home.packages = with pkgs; [
     # Developer tooling
-    pkgsUnstable.nodejs
-    pkgsUnstable.pnpm
-    pkgsUnstable.bun
-    pkgsUnstable.uv
-    pkgsUnstable.go
-    pkgsUnstable.rustup
-    pkgsUnstable.gh
-    pkgsUnstable.codex
+    nodejs
+    pnpm
+    bun
+    uv
+    go
+    rustup
+    gh
+    codex
     llmAgents.rtk
     llmAgents.herdr
     llmAgents.agent-browser

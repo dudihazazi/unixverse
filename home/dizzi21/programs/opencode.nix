@@ -9,18 +9,6 @@
 let
   json = value: (builtins.toJSON value) + "\n";
   opencodePkg = inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.opencode;
-  opencodeScripts = builtins.path {
-    path = ./scripts;
-    name = "opencode-scripts";
-  };
-  opencodeAddonsSync = pkgs.writeShellApplication {
-    name = "opencode-addons-sync";
-    runtimeInputs = with pkgs; [
-      git
-      coreutils
-    ];
-    text = builtins.readFile (opencodeScripts + "/opencode-addons-sync.sh");
-  };
 
   opencodeConfig = {
     "$schema" = "https://opencode.ai/config.json";
@@ -47,7 +35,6 @@ in
 
     home.packages = [
       opencodePkg
-      opencodeAddonsSync
     ];
   };
 }

@@ -11,7 +11,8 @@ Agents should optimize for safe, reviewable, minimal diffs.
 - `home/<user>/` contains Home Manager user-level configuration.
 
 **Hard rule**: keep hardware- or machine-specific changes in `hosts/<name>/`.
-**Hard rule**: keep `modules/nixos/base.nix` generic for all NixOS hosts.
+**Hard rule**: keep `modules/nixos/personal-base.nix` limited to settings shared
+across this user's hosts; keep machine-specific settings in `hosts/<name>/`.
 
 ## Common Commands
 
@@ -115,7 +116,7 @@ them deterministic.
 - NixOS modules typically begin with:
   - `{ config, pkgs, ... }:`
 - Home Manager modules typically include extra args as needed:
-  - `{ config, pkgs, inputs, lib, pkgsUnstable, ... }:`
+  - `{ config, pkgs, inputs, lib, ... }:`
 - Put `imports = [ ... ];` near the top of a module.
 - Use relative paths for imports.
 
@@ -128,7 +129,7 @@ them deterministic.
 
 ### Organization & separation of concerns
 
-- Keep `modules/nixos/base.nix` generic and reusable.
+- Keep `modules/nixos/personal-base.nix` limited to shared personal settings.
 - Keep `modules/nixos/desktop.nix` focused on desktop-related services.
 - Keep `hosts/<name>/configuration.nix` for machine-specific settings:
   - hardware quirks, hostnames, device-specific services

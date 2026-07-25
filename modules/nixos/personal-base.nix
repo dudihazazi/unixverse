@@ -1,4 +1,4 @@
-# modules/nixos/base.nix
+# modules/nixos/personal-base.nix
 { pkgs, ... }:
 
 {
@@ -32,30 +32,13 @@
     LC_TIME = "id_ID.UTF-8";
   };
 
-  # Networking
-  networking.networkmanager.enable = true;
-  networking.networkmanager.dns = "none";
-  networking.nameservers = [
-    "9.9.9.9"
-    "149.112.112.112"
-    "2620:fe::fe"
-    "2620:fe::9"
-    "1.1.1.1"
-    "1.0.0.1"
-    "2606:4700:4700::1111"
-    "2606:4700:4700::1001"
-  ];
-
   # Users and shells
   programs.zsh.enable = true;
   programs.nix-ld.enable = true;
   users.users.dizzi21 = {
     isNormalUser = true;
     description = "Dudi Hazazi";
-    extraGroups = [
-      "networkmanager"
-      "wheel"
-    ];
+    extraGroups = [ "wheel" ];
     shell = pkgs.zsh;
   };
 

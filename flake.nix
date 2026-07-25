@@ -3,7 +3,6 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
-    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     home-manager = {
       url = "github:nix-community/home-manager/release-26.05";
@@ -17,6 +16,7 @@
 
     nixos-hardware = {
       url = "github:NixOS/nixos-hardware";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     zen-browser = {
@@ -36,6 +36,7 @@
 
     catppuccin = {
       url = "github:catppuccin/nix/release-26.05";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
   };
@@ -44,22 +45,17 @@
     inputs@{
       self,
       nixpkgs,
-      nixpkgs-unstable,
       home-manager,
       ...
     }:
     let
       system = "x86_64-linux";
-      pkgsUnstable = import nixpkgs-unstable {
-        inherit system;
-        config.allowUnfree = true;
-      };
     in
     {
       nixosConfigurations = {
         rog-laptop = nixpkgs.lib.nixosSystem {
           inherit system;
-          specialArgs = { inherit inputs pkgsUnstable; };
+          specialArgs = { inherit inputs; };
           modules = [
             ./hosts/rog-laptop/configuration.nix
             home-manager.nixosModules.home-manager
@@ -67,14 +63,14 @@
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.backupFileExtension = "bak";
-              home-manager.extraSpecialArgs = { inherit inputs pkgsUnstable; };
+              home-manager.extraSpecialArgs = { inherit inputs; };
               home-manager.users.dizzi21 = import ./home/dizzi21/home-desktop.nix;
             }
           ];
         };
         wsl = nixpkgs.lib.nixosSystem {
           inherit system;
-          specialArgs = { inherit inputs pkgsUnstable; };
+          specialArgs = { inherit inputs; };
           modules = [
             inputs.nixos-wsl.nixosModules.default
             ./hosts/wsl/configuration.nix
@@ -83,7 +79,7 @@
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.backupFileExtension = "bak";
-              home-manager.extraSpecialArgs = { inherit inputs pkgsUnstable; };
+              home-manager.extraSpecialArgs = { inherit inputs; };
               home-manager.users.dizzi21 = import ./home/dizzi21/home-wsl.nix;
             }
           ];

@@ -114,6 +114,8 @@ do not need the current build artifact.
 
 ## Conventions
 
-- Keep `modules/nixos/base.nix` generic for all NixOS hosts.
+- Keep shared personal settings in `modules/nixos/personal-base.nix`; put
+  machine-specific settings in `hosts/<name>/`.
 - Keep `hosts/<name>/configuration.nix` for machine-specific settings only.
 - Prefer small, focused changes with clear sections and ordering.
+- Pencil MCP is configured locally in the Pencil application, not in this repo.
