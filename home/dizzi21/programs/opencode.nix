@@ -9,13 +9,16 @@
 let
   json = value: (builtins.toJSON value) + "\n";
   opencodePkg = inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.opencode;
+  opencodeWrapper = pkgs.writeShellScriptBin "opencode" ''
+    config_dir="''${XDG_CONFIG_HOME:-$HOME/.config}/opencode"
+    if [ -f "$config_dir/opencode.local.json" ]; then
+      export OPENCODE_CONFIG="$config_dir/opencode.local.json"
+    fi
+    exec ${opencodePkg}/bin/opencode "$@"
+  '';
 
   opencodeConfig = {
     "$schema" = "https://opencode.ai/config.json";
-    plugin = [
-      "oh-my-opencode-slim"
-      "./plugins/caveman/plugin.js"
-    ];
   };
   ohMyOpenCodeSlimConfig = import ./opencode-slim.nix;
 in
@@ -34,7 +37,7 @@ in
     };
 
     home.packages = [
-      opencodePkg
+      opencodeWrapper
     ];
   };
 }

@@ -73,6 +73,20 @@ This flake also includes a `wsl` NixOS configuration based on `NixOS-WSL`.
 
 ## Common workflows
 
+### OpenCode addons
+
+After applying Home Manager, ask an agent to follow
+`~/devs/unixverse/opencode/BOOTSTRAP.md` for external plugin/skill dependencies.
+Then run `bash ~/devs/unixverse/scripts/bootstrap-opencode.sh install`.
+The script only links repo-managed guidance and skills; it never clones or
+updates third-party repositories. Run
+`bash ~/devs/unixverse/scripts/bootstrap-opencode.sh check` to validate the
+wiring.
+
+The OpenCode wrapper loads an optional machine-local
+`~/.config/opencode/opencode.local.json` overlay. An agent following the
+bootstrap guide configures Pencil there; no Pencil path is stored in this repo.
+
 - **Build only (safe)**:
   - `sudo nixos-rebuild build --flake ~/devs/unixverse#rog-laptop`
   - `sudo nixos-rebuild build --flake ~/devs/unixverse#wsl`
