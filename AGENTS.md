@@ -66,7 +66,7 @@ Do not rely on aliases in CI or agent scripts; use the full commands.
 
 ### Formatting Nix
 
-- Formatter: `nixfmt-rfc-style` (installed via Home Manager packages).
+- Formatter: `nixfmt-rfc-style` (available after Home Manager activation).
 - Format a single file:
   - `nixfmt path/to/file.nix`
 - Format a single file when `nixfmt` is not installed locally:
@@ -134,6 +134,8 @@ them deterministic.
 - Keep `hosts/<name>/configuration.nix` for machine-specific settings:
   - hardware quirks, hostnames, device-specific services
 - Keep user programs/settings in `home/<user>/base.nix` + per-host overlays.
+- Keep `users.users.dizzi21.linger = true` on WSL; NixOS rebuild activation
+  requires its systemd user manager and D-Bus.
 
 ### Types and correctness
 

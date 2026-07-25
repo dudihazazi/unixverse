@@ -17,6 +17,6 @@
 
   # WSL-specific shell aliases
   programs.zsh.shellAliases = {
-    ns = "sudo nixos-rebuild switch --flake ~/devs/unixverse#wsl";
+    ns = "sudo nixos-rebuild switch --flake $HOME/devs/unixverse#wsl";
   };
 }

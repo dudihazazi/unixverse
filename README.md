@@ -1,6 +1,6 @@
 # unixverse
 
-Opinionated but minimal NixOS + Home Manager setup.
+Opinionated personal NixOS + Home Manager setup.
 
 This repo is a Nix flake that builds complete NixOS systems (plus Home Manager)
 for the hosts defined in `flake.nix`.
@@ -68,6 +68,9 @@ This flake also includes a `wsl` NixOS configuration based on `NixOS-WSL`.
 
    `sudo nixos-rebuild switch --flake ~/devs/unixverse#wsl`
 
+   The WSL host enables lingering for `dizzi21` so its systemd user manager and
+   D-Bus stay available during future rebuilds.
+
 ## Common workflows
 
 - **Build only (safe)**:
@@ -119,3 +122,5 @@ do not need the current build artifact.
 - Keep `hosts/<name>/configuration.nix` for machine-specific settings only.
 - Prefer small, focused changes with clear sections and ordering.
 - Pencil MCP is configured locally in the Pencil application, not in this repo.
+- WSL requires `users.users.dizzi21.linger = true`; do not remove it without
+  verifying `nixos-rebuild switch` can reach the user D-Bus.

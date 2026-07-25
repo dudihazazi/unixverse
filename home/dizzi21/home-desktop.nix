@@ -25,7 +25,7 @@ in
 
   # Desktop-specific shell aliases
   programs.zsh.shellAliases = {
-    ns = "sudo nixos-rebuild switch --flake ~/devs/unixverse#rog-laptop";
+    ns = "sudo nixos-rebuild switch --flake $HOME/devs/unixverse#rog-laptop";
     zed = "zeditor";
   };
 

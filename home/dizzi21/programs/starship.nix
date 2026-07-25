@@ -1,138 +1,83 @@
-# Starship prompt settings (Home Manager imports this file)
+# Shared Starship settings. ASCII markers keep this reliable in Windows Terminal.
 {
   "$schema" = "https://starship.rs/config-schema.json";
-  format = "[](red)$os$username[](bg:peach fg:red)$directory[](bg:yellow fg:peach)$git_branch$git_status[](fg:yellow bg:green)$c$rust$golang$nodejs$python[](fg:green bg:sapphire)$conda[](fg:sapphire bg:lavender)$time[ ](fg:lavender)$cmd_duration$line_break$character";
-
-  os = {
-    disabled = false;
-    style = "bg:red fg:crust";
-    symbols = {
-      Windows = "";
-      Ubuntu = "󰕈";
-      SUSE = "";
-      Raspbian = "󰐿";
-      Mint = "󰣭";
-      Macos = "󰀵";
-      Manjaro = "";
-      Linux = "󰌽";
-      Gentoo = "󰣨";
-      Fedora = "󰣛";
-      Alpine = "";
-      Amazon = "";
-      Android = "";
-      AOSC = "";
-      Arch = "󰣇";
-      Artix = "󰣇";
-      CentOS = "";
-      Debian = "󰣚";
-      Redhat = "󱄛";
-      RedHatEnterprise = "󱄛";
-    };
-  };
+  add_newline = false;
+  format = "$username$hostname$directory$git_branch$git_status$nodejs$python$rust$golang$nix_shell$cmd_duration$line_break$character";
 
   username = {
     show_always = true;
-    style_user = "bg:red fg:crust";
-    style_root = "bg:red fg:crust";
-    format = "[ $user]($style)";
+    style_user = "bold #7ee787";
+    style_root = "bold #ff7b72";
+    format = "[$user]($style)";
+  };
+
+  hostname = {
+    ssh_only = false;
+    style = "bold #79c0ff";
+    format = "[@$hostname]($style) ";
   };
 
   directory = {
-    style = "bg:peach fg:crust";
-    format = "[ $path ]($style)";
+    style = "bold #d2a8ff";
     truncation_length = 3;
-    truncation_symbol = "…/";
-    substitutions = {
-      Documents = "󰈙 ";
-      Downloads = " ";
-      Music = "󰝚 ";
-      Pictures = " ";
-      Developer = "󰲋 ";
-    };
+    truncation_symbol = ".../";
+    format = "[$path]($style) ";
   };
 
   git_branch = {
-    symbol = "";
-    style = "bg:yellow";
-    format = "[[ $symbol $branch ](fg:crust bg:yellow)]($style)";
+    symbol = "git:";
+    style = "bold #f2cc60";
+    format = "[$symbol$branch]($style) ";
   };
 
   git_status = {
-    style = "bg:yellow";
-    format = "[[($all_status$ahead_behind )](fg:crust bg:yellow)]($style)";
+    style = "bold #ff7b72";
+    conflicted = "=";
+    ahead = ">";
+    behind = "<";
+    diverged = "<>";
+    untracked = "?";
+    stashed = "$";
+    modified = "!";
+    staged = "+";
+    renamed = ">";
+    deleted = "x";
+    format = "[$all_status$ahead_behind]($style) ";
   };
 
   nodejs = {
-    symbol = "";
-    style = "bg:green";
-    format = "[[ $symbol( $version) ](fg:crust bg:green)]($style)";
-  };
-
-  c = {
-    symbol = " ";
-    style = "bg:green";
-    format = "[[ $symbol( $version) ](fg:crust bg:green)]($style)";
-  };
-
-  rust = {
-    symbol = "";
-    style = "bg:green";
-    format = "[[ $symbol( $version) ](fg:crust bg:green)]($style)";
-  };
-
-  golang = {
-    symbol = "";
-    style = "bg:green";
-    format = "[[ $symbol( $version) ](fg:crust bg:green)]($style)";
+    style = "#7ee787";
+    format = "[node:$version]($style) ";
   };
 
   python = {
-    symbol = "";
-    style = "bg:green";
-    format = "[[ $symbol( $version)(\(#$virtualenv\)) ](fg:crust bg:green)]($style)";
+    style = "#79c0ff";
+    format = "[py:$version]($style) ";
   };
 
-  docker_context = {
-    symbol = "";
-    style = "bg:sapphire";
-    format = "[[ $symbol( $context) ](fg:crust bg:sapphire)]($style)";
+  rust = {
+    style = "#ff7b72";
+    format = "[rust:$version]($style) ";
   };
 
-  conda = {
-    symbol = "  ";
-    style = "fg:crust bg:sapphire";
-    format = "[$symbol$environment ]($style)";
-    ignore_base = false;
+  golang = {
+    style = "#56d4dd";
+    format = "[go:$version]($style) ";
   };
 
-  time = {
-    disabled = false;
-    time_format = "%R";
-    style = "bg:lavender";
-    format = "[[  $time ](fg:crust bg:lavender)]($style)";
-  };
-
-  line_break = {
-    disabled = false;
-  };
-
-  character = {
-    disabled = false;
-    success_symbol = "[❯](bold fg:green)";
-    error_symbol = "[❯](bold fg:red)";
-    vimcmd_symbol = "[❮](bold fg:green)";
-    vimcmd_replace_one_symbol = "[❮](bold fg:lavender)";
-    vimcmd_replace_symbol = "[❮](bold fg:lavender)";
-    vimcmd_visual_symbol = "[❮](bold fg:yellow)";
+  nix_shell = {
+    style = "#d2a8ff";
+    format = "[nix:$state]($style) ";
   };
 
   cmd_duration = {
-    show_milliseconds = true;
-    format = " in $duration ";
-    style = "bg:lavender";
-    disabled = false;
-    show_notifications = true;
-    min_time_to_notify = 45000;
+    min_time = 2000;
+    style = "#f2cc60";
+    format = "[took:$duration]($style) ";
   };
 
+  character = {
+    success_symbol = "[>](bold #7ee787) ";
+    error_symbol = "[>](bold #ff7b72) ";
+  };
 }
