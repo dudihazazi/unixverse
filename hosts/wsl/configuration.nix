@@ -9,6 +9,7 @@
 
   wsl.enable = true;
   wsl.defaultUser = "dizzi21";
+  programs.nix-ld.enable = true;
   services.dbus.enable = true;
   users.users.dizzi21.linger = true;
 
