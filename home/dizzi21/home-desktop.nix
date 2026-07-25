@@ -15,8 +15,6 @@ let
   };
 in
 {
-  _module.args.opencodePkg = pkgsUnstable.opencode;
-
   imports = [
     ./base.nix
     inputs.spicetify-nix.homeManagerModules.default

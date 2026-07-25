@@ -1,9 +1,13 @@
 {
+  inputs,
   pkgs,
   pkgsUnstable,
   ...
 }:
 
+let
+  llmAgents = inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system};
+in
 {
   imports = [ ./programs/opencode.nix ];
 
@@ -157,7 +161,9 @@
     pkgsUnstable.rustup
     pkgsUnstable.gh
     pkgsUnstable.codex
-    pkgsUnstable.rtk
+    llmAgents.rtk
+    llmAgents.herdr
+    llmAgents.agent-browser
     nixd
     nixfmt
   ];

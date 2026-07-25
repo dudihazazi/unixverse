@@ -15,7 +15,10 @@ let
   };
   opencodeAddonsSync = pkgs.writeShellApplication {
     name = "opencode-addons-sync";
-    runtimeInputs = with pkgs; [ git coreutils ];
+    runtimeInputs = with pkgs; [
+      git
+      coreutils
+    ];
     text = builtins.readFile (opencodeScripts + "/opencode-addons-sync.sh");
   };
 
@@ -23,7 +26,6 @@ let
     "$schema" = "https://opencode.ai/config.json";
     plugin = [
       "oh-my-opencode-slim"
-      "./plugins/ponytail.mjs"
       "./plugins/caveman/plugin.js"
     ];
   };
@@ -37,7 +39,9 @@ in
 
   config = {
     xdg.configFile = {
-      "opencode/opencode.json".text = json (opencodeConfig // config.unixverse.programs.opencode.settings);
+      "opencode/opencode.json".text = json (
+        opencodeConfig // config.unixverse.programs.opencode.settings
+      );
       "opencode/oh-my-opencode-slim.json".text = json ohMyOpenCodeSlimConfig;
     };
 
