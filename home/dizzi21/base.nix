@@ -93,7 +93,6 @@ in
       gl = "git log --oneline --decorate --graph";
       gm = "git merge";
       gp = "git pull";
-      gpl = "git pull";
       gps = "git push";
       gpf = "git push --force-with-lease";
       grb = "git rebase";
@@ -148,6 +147,7 @@ in
   programs.starship = {
     enable = true;
     enableZshIntegration = true;
+    settings = import ./programs/starship.nix;
   };
 
   home.packages = with pkgs; [

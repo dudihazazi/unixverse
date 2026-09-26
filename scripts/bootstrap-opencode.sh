@@ -3,9 +3,7 @@ set -euo pipefail
 
 repo_dir=$(CDPATH= cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)
 config_dir=${XDG_CONFIG_HOME:-$HOME/.config}/opencode
-skills_dir=$config_dir/skills
 mode=${1:-install}
-skills=(code-review codebase-design diagnosing-bugs domain-modeling grill-with-docs grilling handoff improve-codebase-architecture research resolving-merge-conflicts tdd)
 
 die() { printf 'bootstrap-opencode: %s\n' "$*" >&2; exit 1; }
 
@@ -30,12 +28,9 @@ case "$mode" in
 esac
 
 if [ "$mode" = install ]; then
-  mkdir -p "$config_dir" "$skills_dir"
+  mkdir -p "$config_dir"
 fi
 
 link "$repo_dir/opencode/AGENTS.md" "$config_dir/AGENTS.md"
-for skill in "${skills[@]}"; do
-  link "$repo_dir/opencode/skills/$skill" "$skills_dir/$skill"
-done
 
 printf 'OpenCode bootstrap %s complete.\n' "$mode"

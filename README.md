@@ -75,16 +75,21 @@ This flake also includes a `wsl` NixOS configuration based on `NixOS-WSL`.
 
 ### OpenCode addons
 
+Home Manager registers `oh-my-opencode-slim@2.2.25` on both hosts and manages
+its shared settings. OpenCode downloads the plugin on its first launch after
+activation; restart OpenCode to load it.
+
 After applying Home Manager, ask an agent to follow
-`~/devs/unixverse/opencode/BOOTSTRAP.md` for external plugin/skill dependencies.
+`~/devs/unixverse/opencode/BOOTSTRAP.md` for other external plugin/skill
+dependencies.
 Then run `bash ~/devs/unixverse/scripts/bootstrap-opencode.sh install`.
-The script only links repo-managed guidance and skills; it never clones or
-updates third-party repositories. Run
+The script only links repo-managed guidance; it never clones or updates
+third-party repositories. Run
 `bash ~/devs/unixverse/scripts/bootstrap-opencode.sh check` to validate the
 wiring.
 
 The OpenCode wrapper loads an optional machine-local
-`~/.config/opencode/opencode.local.json` overlay. An agent following the
+`~/.config/opencode/opencode.local.json` config. An agent following the
 bootstrap guide configures Pencil there; no Pencil path is stored in this repo.
 
 - **Build only (safe)**:

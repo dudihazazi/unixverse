@@ -1,6 +1,6 @@
 # OpenCode external dependency bootstrap
 
-This repository owns the global guidance and custom skills wired by
+This repository owns the global guidance linked by
 `scripts/bootstrap-opencode.sh`. Do not add third-party clones or network
 operations to that script.
 
@@ -9,10 +9,12 @@ upstream installation documentation. Do not rely on remembered commands or
 hard-coded repository layouts. Verify the instructions and compatibility with
 the installed OpenCode version first.
 
-Desired sources/categories:
+Home Manager registers a pinned OMO-slim plugin and its settings on both hosts.
+OpenCode downloads it when launched after Home Manager activation; do not run
+the OMO-slim installer over this managed configuration.
 
-- OMO-slim (oh-my-opencode-slim) plugin:
-  <https://github.com/alvinunreal/oh-my-opencode-slim>
+Other optional external sources/categories:
+
 - Caveman plugin: <https://github.com/JuliusBrussee/caveman>
 - Third-party skills: <https://github.com/mattpocock/skills>
 
@@ -24,9 +26,9 @@ Install only the plugins and skills actually requested, using the
 upstream-supported method. Preserve existing user data, configuration, and
 unrelated plugins. Never replace non-symlink files belonging to the user.
 
-The Nix-managed global config is read-only. Put machine-local MCP and plugin
-settings in `${XDG_CONFIG_HOME:-$HOME/.config}/opencode/opencode.local.json`.
-The installed `opencode` wrapper loads that overlay after the global config.
+Put machine-local MCP and plugin settings in
+`${XDG_CONFIG_HOME:-$HOME/.config}/opencode/opencode.local.json`.
+The installed `opencode` wrapper loads that config when it exists.
 For Pencil, first verify the current Pencil MCP executable and the current
 OpenCode MCP schema; then add a local `mcp.pencil` entry using the verified
 path. Do not commit that file or its absolute path.
@@ -40,5 +42,5 @@ bash scripts/bootstrap-opencode.sh install
 bash scripts/bootstrap-opencode.sh check
 ```
 
-The local script only links repository-managed `AGENTS.md` and custom skills.
+The local script only links repository-managed `AGENTS.md`.
 It does not install, clone, update, or configure external dependencies.

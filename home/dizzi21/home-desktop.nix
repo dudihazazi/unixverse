@@ -29,79 +29,13 @@ in
     zed = "zeditor";
   };
 
-  programs.starship.settings = import ./programs/starship.nix;
-
-  # Themes
-  catppuccin = {
-    starship = {
-      enable = true;
-      flavor = "frappe";
-    };
-
-    wezterm = {
-      apply = true;
-      enable = true;
-      flavor = "frappe";
-      accent = "lavender";
-    };
-
-    zed = {
-      enable = true;
-      flavor = "frappe";
-      accent = "lavender";
-
-      icons = {
-        enable = true;
-        flavor = "frappe";
-      };
-    };
-  };
-
-  programs.wezterm = {
+  catppuccin.starship = {
     enable = true;
-    extraConfig = ''
-      local wezterm = require 'wezterm'
-      config = config or {}
-      if next(config) == nil and wezterm.config_builder then
-        config = wezterm.config_builder()
-      end
-
-      config.font = wezterm.font("JetBrainsMono Nerd Font")
-      config.font_size = 12.0
-      config.default_prog = { "zsh" }
-
-      return config
-    '';
+    flavor = "frappe";
   };
 
-  programs.zed-editor = {
-    enable = true;
-    userSettings = {
-      terminal = {
-        font_family = "JetBrainsMono Nerd Font";
-        shell = {
-          program = "${pkgs.zsh}/bin/zsh";
-        };
-      };
-      telemetry = {
-        diagnostics = false;
-        metrics = false;
-      };
-      ui_font_size = 16;
-      buffer_font_size = 15;
-      tab_size = 2;
-      soft_wrap = "editor_width";
-      hard_tabs = false;
-      format_on_save = "on";
-      remove_trailing_whitespace_on_save = true;
-      ensure_final_newline_on_save = true;
-      languages = {
-        Nix = {
-          language_servers = [ "nixd" ];
-        };
-      };
-    };
-  };
+  programs.wezterm.enable = true;
+  programs.zed-editor.enable = true;
 
   programs.spicetify = {
     enable = true;

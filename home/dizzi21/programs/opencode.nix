@@ -1,7 +1,5 @@
 {
-  config,
   inputs,
-  lib,
   pkgs,
   ...
 }:
@@ -17,27 +15,16 @@ let
     exec ${opencodePkg}/bin/opencode "$@"
   '';
 
-  opencodeConfig = {
-    "$schema" = "https://opencode.ai/config.json";
-  };
   ohMyOpenCodeSlimConfig = import ./opencode-slim.nix;
 in
 {
-  options.unixverse.programs.opencode.settings = lib.mkOption {
-    type = lib.types.attrs;
-    default = { };
-  };
-
-  config = {
-    xdg.configFile = {
-      "opencode/opencode.json".text = json (
-        opencodeConfig // config.unixverse.programs.opencode.settings
-      );
-      "opencode/oh-my-opencode-slim.json".text = json ohMyOpenCodeSlimConfig;
+  xdg.configFile = {
+    "opencode/opencode.json".text = json {
+      "$schema" = "https://opencode.ai/config.json";
+      plugin = [ "oh-my-opencode-slim@2.2.25" ];
     };
-
-    home.packages = [
-      opencodeWrapper
-    ];
+    "opencode/oh-my-opencode-slim.json".text = json ohMyOpenCodeSlimConfig;
   };
+
+  home.packages = [ opencodeWrapper ];
 }
