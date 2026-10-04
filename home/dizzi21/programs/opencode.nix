@@ -7,7 +7,7 @@
 let
   json = value: (builtins.toJSON value) + "\n";
   opencodePkg = inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.opencode2;
-  opencodeWrapper = pkgs.writeShellScriptBin "opencode2" ''
+  opencodeWrapper = pkgs.writeShellScriptBin "opencode" ''
     config_dir="''${XDG_CONFIG_HOME:-$HOME/.config}/opencode"
     if [ -f "$config_dir/opencode.local.json" ]; then
       export OPENCODE_CONFIG="$config_dir/opencode.local.json"
