@@ -6,11 +6,18 @@
 
 let
   spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.stdenv.hostPlatform.system};
+  unstablePkgs = inputs.nixpkgs-unstable.legacyPackages.${pkgs.stdenv.hostPlatform.system};
   spicyLyricsSrc = pkgs.fetchFromGitHub {
     owner = "Spikerko";
     repo = "spicy-lyrics";
     rev = "2de7a609bdead1ade90addde2b1d551d4b87e87a";
     hash = "sha256-VEMxk9Hjtuh5fRYt0LzOhkd34sr2i6e6FFM55FJHz98=";
+  };
+  spicyLyricTranslatorSrc = pkgs.fetchFromGitHub {
+    owner = "7xeh";
+    repo = "SpicyLyricTranslator";
+    rev = "ee990a59e3a20dff6966929dfc6e1ff59305652d";
+    hash = "sha256-C/1c0hiZwXBC/Y2Su7hNaBamXSoZrav8UGbapKKiayI=";
   };
 in
 {
@@ -40,6 +47,7 @@ in
   programs.spicetify = {
     enable = true;
     spotifyPackage = pkgs.spotify;
+    spicetifyPackage = unstablePkgs.spicetify-cli;
     theme = spicePkgs.themes.catppuccin;
     colorScheme = "macchiato";
     enabledExtensions = with spicePkgs.extensions; [
@@ -47,6 +55,13 @@ in
       {
         name = "spicy-lyrics.mjs";
         src = "${spicyLyricsSrc}/builds";
+      }
+      {
+        name = "spicy-lyric-translater.js";
+        src = pkgs.runCommand "spicy-lyric-translator-loader" { } ''
+          mkdir -p "$out"
+          cp ${spicyLyricTranslatorSrc}/loader/SLT-loader.js "$out/spicy-lyric-translater.js"
+        '';
       }
     ];
     enabledCustomApps = with spicePkgs.apps; [
