@@ -25,14 +25,15 @@
     ];
   };
 
-  # X11 / Desktop
-  services.xserver.enable = true;
+  # COSMIC desktop and login screen
+  services.displayManager.cosmic-greeter.enable = true;
+  services.desktopManager.cosmic.enable = true;
+  security.pam.services.cosmic-greeter.enableGnomeKeyring = true;
 
-  # KDE Plasma
-  services.displayManager.sddm.enable = true;
-  services.desktopManager.plasma6.enable = true;
+  # Use the Home Manager OpenSSH agent instead of GCR's SSH agent.
+  services.gnome.gcr-ssh-agent.enable = false;
 
-  # X11 keymap
+  # Keyboard layout (also used by COSMIC)
   services.xserver.xkb = {
     layout = "us";
     variant = "";
