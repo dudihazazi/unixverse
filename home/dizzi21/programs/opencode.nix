@@ -21,7 +21,7 @@ in
   xdg.configFile = {
     "opencode/opencode.json".text = json {
       "$schema" = "https://opencode.ai/config.json";
-      plugins = [ "oh-my-opencode-slim@3.0.2" ];
+      plugins = [ "oh-my-opencode-slim@3.0.5" ];
     };
     "opencode/oh-my-opencode-slim.json".text = json ohMyOpenCodeSlimConfig;
   };

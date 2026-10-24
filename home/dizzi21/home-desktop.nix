@@ -34,7 +34,7 @@ in
     flavor = "frappe";
   };
 
-  programs.wezterm.enable = true;
+  programs.ghostty.enable = true;
   programs.zed-editor.enable = true;
 
   programs.spicetify = {
