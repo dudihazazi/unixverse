@@ -40,6 +40,8 @@ in
   programs.spicetify = {
     enable = true;
     spotifyPackage = pkgs.spotify;
+    theme = spicePkgs.themes.catppuccin;
+    colorScheme = "macchiato";
     enabledExtensions = with spicePkgs.extensions; [
       adblockify
       {
@@ -60,6 +62,7 @@ in
 
     # Media
     vlc
+    loupe
 
     # Utilities
     easyeffects
