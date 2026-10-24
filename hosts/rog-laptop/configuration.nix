@@ -28,6 +28,11 @@
     "2606:4700:4700::1001"
   ];
 
+  programs.localsend = {
+    enable = true;
+    openFirewall = true;
+  };
+
   # NVIDIA PRIME offload (Intel as primary)
   services.xserver.videoDrivers = [ "nvidia" ];
   hardware.nvidia = {
