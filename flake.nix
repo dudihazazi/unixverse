@@ -33,7 +33,7 @@
 
     llm-agents = {
       url = "github:numtide/llm-agents.nix";
-      inputs.nixpkgs.follows = "nixpkgs";
+      # Keep upstream's unstable nixpkgs for helpers missing from NixOS stable.
       inputs.systems.follows = "systems";
     };
 
