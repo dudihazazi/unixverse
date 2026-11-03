@@ -43,7 +43,7 @@
       };
 
       designer = {
-        model = "openai/gpt-6.1-sol";
+        model = "openai/gpt-6.1-terra";
         variant = "medium";
         skills = [ ];
         skills_include_local = true;
@@ -51,7 +51,7 @@
       };
 
       fixer = {
-        model = "openai/gpt-6-luna";
+        model = "openai/gpt-6.1-terra";
         variant = "high";
         skills = [ ];
         skills_include_local = true;

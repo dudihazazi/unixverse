@@ -75,7 +75,7 @@ This flake also includes a `wsl` NixOS configuration based on `NixOS-WSL`.
 
 ### OpenCode addons
 
-Home Manager registers `oh-my-opencode-slim@2.2.25` on both hosts and manages
+Home Manager registers `oh-my-opencode-slim@3.0.6` on both hosts and manages
 its shared settings. OpenCode downloads the plugin on its first launch after
 activation; restart OpenCode to load it.
 
